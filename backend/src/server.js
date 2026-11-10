@@ -24,6 +24,7 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.set('trust proxy', 1);
 
 // Security Headers Setup
 app.use(helmet());
@@ -42,7 +43,7 @@ const corsOptions = {
   origin: (origin, callback) => {
     // Allow requests with no origin (like mobile apps, curl, postman)
     if (!origin) return callback(null, true);
-    
+
     // Check if the origin is in the allowed list or matches production CLIENT_URL
     const clientUrl = process.env.CLIENT_URL;
     if (allowedOrigins.includes(origin) || (clientUrl && origin === clientUrl)) {
