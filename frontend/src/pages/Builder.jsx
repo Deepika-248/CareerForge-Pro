@@ -389,7 +389,7 @@ const Builder = () => {
   const [isImportingResume, setIsImportingResume] = useState(false);
 
   // History & Plan Stats
-  const [planStats, setPlanStats] = useState({ plan: 'FREE', aiRewriteCount: 0, resumeCount: 1, resumeLimit: 1, aiLimit: 10 });
+  const [planStats, setPlanStats] = useState({ plan: 'PRO', aiRewriteCount: 0, resumeCount: 1, resumeLimit: Infinity, aiLimit: Infinity });
   const [historyLogs, setHistoryLogs] = useState([]);
 
   // Fetch plan stats on load
@@ -943,19 +943,19 @@ const Builder = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center text-slate-400">
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center text-slate-500">
         <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mb-4" />
-        <p className="font-semibold text-lg">Forging your editing studio...</p>
+        <p className="font-semibold text-lg text-slate-800">Forging your editing studio...</p>
       </div>
     );
   }
 
   if (error && !currentResume) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-6 text-center">
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 text-center">
         <AlertTriangle className="w-16 h-16 text-red-500 mb-4" />
-        <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">Failed to Load Resume</h3>
-        <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mt-2">{error}</p>
+        <h3 className="text-xl font-bold text-slate-900">Failed to Load Resume</h3>
+        <p className="text-sm text-slate-500 max-w-md mt-2">{error}</p>
         <Link to="/dashboard" className="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-semibold text-sm">
           Return to Dashboard
         </Link>
@@ -1257,10 +1257,10 @@ const Builder = () => {
       initial="initial"
       animate="animate"
       variants={pageTransitions}
-      className="min-h-screen md:h-screen md:overflow-hidden bg-slate-50 dark:bg-slate-950 flex flex-col"
+      className="min-h-screen md:h-screen md:overflow-hidden bg-slate-50 flex flex-col"
     >
       {/* Top action header banner */}
-      <header id="builder-header-banner" className="sticky top-0 z-40 bg-white dark:bg-slate-900 border-b border-slate-200/50 dark:border-slate-800/50 px-6 py-4 flex items-center justify-between shadow-sm">
+      <header id="builder-header-banner" className="sticky top-0 z-40 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between shadow-xs">
         <div className="flex items-center gap-4">
           <Link
             to="/dashboard"
@@ -1274,7 +1274,7 @@ const Builder = () => {
               }
               await saveResumeImmediately();
             }}
-            className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+            className="p-2 hover:bg-slate-100 rounded-xl text-slate-500 hover:text-slate-800 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
           </Link>
@@ -1284,12 +1284,12 @@ const Builder = () => {
                 type="text"
                 value={title}
                 onChange={(e) => updateResumeLocal({ title: e.target.value })}
-                className="bg-transparent border-b border-transparent hover:border-slate-300 dark:hover:border-slate-700 focus:border-indigo-500 font-bold font-display text-slate-800 dark:text-slate-100 text-lg focus:outline-none px-1 py-0.5 rounded transition-all"
+                className="bg-transparent border-b border-transparent hover:border-slate-300 focus:border-indigo-500 font-bold font-display text-slate-900 text-lg focus:outline-none px-1 py-0.5 rounded transition-all"
               />
             </div>
-            <div className="flex items-center gap-2 mt-0.5 text-xs text-slate-400">
+            <div className="flex items-center gap-2 mt-0.5 text-xs text-slate-500">
               <span>Status:</span>
-              <span className={`font-semibold ${saving ? 'text-indigo-600 dark:text-indigo-400' : 'text-emerald-500'}`}>
+              <span className={`font-semibold ${saving ? 'text-indigo-600' : 'text-emerald-600'}`}>
                 {saveStatus}
               </span>
             </div>
@@ -1312,22 +1312,22 @@ const Builder = () => {
               resetUploadModal();
               setIsUploadModalOpen(true);
             }}
-            className="inline-flex items-center gap-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow cursor-pointer active:scale-95 hover:-translate-y-0.5"
+            className="inline-flex items-center gap-1.5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-xs hover:shadow-sm cursor-pointer active:scale-95 hover:-translate-y-0.5"
           >
-            <Upload className="w-3.5 h-3.5 text-indigo-500" />
+            <Upload className="w-3.5 h-3.5 text-indigo-600" />
             <span>Upload Existing Resume</span>
           </button>
 
           {/* Auto Save Toggle Switch */}
-          <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 select-none">
-            <span className="text-slate-500 dark:text-slate-400">Auto Save:</span>
-            <span className={autoSaveEnabled ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400'}>
+          <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700 select-none">
+            <span className="text-slate-500">Auto Save:</span>
+            <span className={autoSaveEnabled ? 'text-indigo-600' : 'text-slate-400'}>
               {autoSaveEnabled ? 'ON' : 'OFF'}
             </span>
             <button
               onClick={handleToggleAutoSave}
               className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                autoSaveEnabled ? 'bg-indigo-600' : 'bg-slate-300 dark:bg-slate-700'
+                autoSaveEnabled ? 'bg-indigo-600' : 'bg-slate-300'
               }`}
             >
               <span
@@ -1342,10 +1342,10 @@ const Builder = () => {
           <div className="relative">
             <button
               onClick={() => setThemeDropdownOpen(!themeDropdownOpen)}
-              className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all shadow-sm hover:shadow active:scale-95 cursor-pointer"
+              className="flex items-center gap-2 px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 transition-all shadow-xs hover:shadow-sm active:scale-95 cursor-pointer"
             >
-              <Palette className="w-3.5 h-3.5 text-indigo-500" />
-              <span>Theme: <strong className="text-indigo-600 dark:text-indigo-400 capitalize">{activeTheme === 'minimalist' ? 'Minimal' : activeTheme}</strong></span>
+              <Palette className="w-3.5 h-3.5 text-indigo-600" />
+              <span>Theme: <strong className="text-indigo-600 capitalize">{activeTheme === 'minimalist' ? 'Minimal' : activeTheme}</strong></span>
               <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${themeDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
@@ -1358,7 +1358,7 @@ const Builder = () => {
                   onClick={() => setThemeDropdownOpen(false)} 
                 />
                 
-                <div className="absolute inset-x-0 mt-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800/80 rounded-xl shadow-xl py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="absolute inset-x-0 mt-2 bg-white border border-slate-200 rounded-xl shadow-xl py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   {[
                     { id: 'modern',     label: 'Modern' },
                     { id: 'minimalist', label: 'Minimalist' },
@@ -1384,8 +1384,8 @@ const Builder = () => {
                         w-full flex items-center justify-between px-3.5 py-2 text-left transition-colors duration-150 text-xs
                         ${locked ? 'opacity-50 cursor-pointer' : 'cursor-pointer'}
                         ${activeTheme === t.id
-                          ? 'bg-indigo-50/60 dark:bg-indigo-950/20 text-indigo-600 dark:text-indigo-400 font-bold'
-                          : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900/60 font-medium'
+                          ? 'bg-indigo-50 text-indigo-600 font-bold'
+                          : 'text-slate-700 hover:bg-slate-50 font-medium'
                         }
                       `}
                     >
@@ -1394,7 +1394,7 @@ const Builder = () => {
                         {locked && <Lock className="w-3 h-3 text-amber-500" />}
                       </span>
                       {activeTheme === t.id && (
-                        <Check className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+                        <Check className="w-3.5 h-3.5 text-indigo-600" />
                       )}
                     </button>
                   );})}
@@ -1404,15 +1404,15 @@ const Builder = () => {
 
             {/* Pro upgrade panel — appears when FREE user clicks a locked template */}
             {showProBanner && (
-              <div className="absolute inset-x-0 top-full mt-2 z-50 bg-white dark:bg-slate-950 border border-indigo-200 dark:border-indigo-800/60 rounded-xl shadow-xl p-3 space-y-2.5">
+              <div className="absolute inset-x-0 top-full mt-2 z-50 bg-white border border-indigo-200 rounded-xl shadow-xl p-3 space-y-2.5">
                 <div className="flex items-start gap-2">
                   <Lock className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
-                  <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-200 leading-snug flex-1">
+                  <p className="text-[11px] font-semibold text-slate-700 leading-snug flex-1">
                     Classic &amp; Minimalist templates require Pro.
                   </p>
                   <button
                     onClick={() => setShowProBanner(false)}
-                    className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 cursor-pointer shrink-0"
+                    className="text-slate-400 hover:text-slate-600 cursor-pointer shrink-0"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -1431,7 +1431,7 @@ const Builder = () => {
             <button
               onClick={handleForceSave}
               disabled={saving}
-              className="inline-flex items-center gap-1.5 bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-900 px-3.5 py-2 rounded-xl text-xs font-bold transition-all disabled:opacity-50 cursor-pointer"
+              className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white px-3.5 py-2 rounded-xl text-xs font-bold transition-all disabled:opacity-50 cursor-pointer shadow-xs"
             >
               <Save className="w-3.5 h-3.5" />
               <span>Save Now</span>
@@ -1462,29 +1462,29 @@ const Builder = () => {
         <motion.div 
           id="builder-left-workspace"
           variants={slideUp}
-          className="w-full md:w-[48%] lg:w-[45%] border-r border-slate-200/50 dark:border-slate-800/50 overflow-y-auto p-5 space-y-6 bg-slate-50 dark:bg-slate-950/20 text-left"
+          className="w-full md:w-[48%] lg:w-[45%] border-r border-slate-200 overflow-y-auto p-5 space-y-6 bg-slate-50 text-left"
         >
           
           {/* Dedicated JD Analysis & Circular ATS Score Panel */}
           {isOptimizeMode && (
-            <div className="bg-white dark:bg-slate-900/90 backdrop-blur-xl rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-xl shadow-slate-200/40 dark:shadow-black/35 space-y-4">
+            <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 bg-indigo-50 dark:bg-indigo-950/60 rounded-xl text-indigo-600 dark:text-indigo-400">
+                <div className="p-2 bg-indigo-50 rounded-xl text-indigo-600">
                   <Brain className="w-5 h-5 animate-pulse" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-slate-800 dark:text-slate-200">
+                  <h4 className="text-sm font-bold text-slate-900">
                     ATS Analyzer Intelligence
                   </h4>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">
-                    Plan Tier: <span className="text-indigo-500 font-extrabold">{planStats.plan}</span>
+                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">
+                    Plan Tier: <span className="text-indigo-600 font-extrabold">{planStats.plan}</span>
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setIsJdOpen(!isJdOpen)}
-                className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline cursor-pointer"
+                className="text-xs font-bold text-indigo-600 hover:underline cursor-pointer"
               >
                 {isJdOpen ? 'Hide Input' : 'Target JD'}
               </button>
@@ -1492,16 +1492,16 @@ const Builder = () => {
 
             {/* Pasting JD Accordion Section with Sample Job Description dropdown library */}
             {isJdOpen && (
-              <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-800/80">
+              <div className="space-y-3 pt-2 border-t border-slate-100">
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Target Job Description</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Target Job Description</label>
                     <div className="flex items-center gap-1">
-                      <span className="text-[9px] text-slate-400 font-bold">Preset:</span>
+                      <span className="text-[9px] text-slate-500 font-bold">Preset:</span>
                       <select
                         value={selectedJdPreset}
                         onChange={(e) => handlePresetChange(e.target.value)}
-                        className="px-2 py-0.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-[10px] font-extrabold rounded-lg text-indigo-600 dark:text-indigo-400 focus:outline-none cursor-pointer"
+                        className="px-2 py-0.5 bg-slate-50 border border-slate-200 text-[10px] font-extrabold rounded-lg text-indigo-600 focus:outline-none cursor-pointer"
                       >
                         <option value="">-- Choose Job --</option>
                         <option value="mern">MERN Stack Developer</option>
@@ -1520,14 +1520,14 @@ const Builder = () => {
                       setJdText(e.target.value);
                       setSelectedJdPreset('');
                     }}
-                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:border-indigo-500 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none resize-none leading-relaxed"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:bg-white rounded-xl text-xs text-slate-900 focus:outline-none resize-none leading-relaxed"
                   />
                 </div>
                 <button
                   type="button"
                   disabled={isJdAnalyzing || !jdText.trim()}
                   onClick={handleJdAnalysis}
-                  className="w-full py-2 bg-linear-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-indigo-500/25 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-indigo-500/25 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {isJdAnalyzing ? (
                     <>
@@ -1546,10 +1546,10 @@ const Builder = () => {
                 {atsError && (
                   <div className={`flex items-start gap-2.5 p-3 rounded-xl border text-xs leading-relaxed ${
                     atsError.type === 'server' || atsError.type === 'network' || atsError.type === 'parse'
-                      ? 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800/40 text-red-700 dark:text-red-400'
+                      ? 'bg-red-50 border-red-200 text-red-700'
                       : atsError.type === 'validation'
-                      ? 'bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800/40 text-amber-700 dark:text-amber-400'
-                      : 'bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800/40 text-red-700 dark:text-red-400'
+                      ? 'bg-amber-50 border-amber-200 text-amber-800'
+                      : 'bg-red-50 border-red-200 text-red-700'
                   }`}>
                     <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
                     <div className="flex-1 min-w-0">
@@ -1579,18 +1579,18 @@ const Builder = () => {
 
             {/* Score & Breakdown display */}
             {!currentResume?.atsMetadata?.lastJdHash ? (
-              <div className="pt-4 text-center py-6 px-4 bg-slate-50/55 dark:bg-slate-950/20 rounded-2xl border border-dashed border-slate-200/60 dark:border-slate-800 space-y-2">
-                <Brain className="w-8 h-8 text-slate-400/80 mx-auto animate-pulse" />
-                <h5 className="text-xs font-bold text-slate-700 dark:text-slate-300">
+              <div className="pt-4 text-center py-6 px-4 bg-slate-50 rounded-2xl border border-dashed border-slate-200 space-y-2">
+                <Brain className="w-8 h-8 text-slate-400 mx-auto animate-pulse" />
+                <h5 className="text-xs font-bold text-slate-800">
                   No Job Description Analyzed
                 </h5>
-                <p className="text-[10px] text-slate-400 dark:text-slate-500 max-w-xs mx-auto leading-relaxed">
+                <p className="text-[10px] text-slate-500 max-w-xs mx-auto leading-relaxed">
                   Enter a target Job Description above and click "Run ATS Matcher" to perform semantic AI matching.
                 </p>
               </div>
             ) : (
               <>
-                <div className="flex items-center gap-5 pt-3 border-t border-slate-100 dark:border-slate-800/80">
+                <div className="flex items-center gap-5 pt-3 border-t border-slate-100">
                   {/* Circular ATS score progress with click overlay & confetti sparkles */}
                   <div 
                     onClick={() => setShowAtsReportModal(true)}
@@ -1626,7 +1626,7 @@ const Builder = () => {
                         cx="32"
                         cy="32"
                         r="28"
-                        className="stroke-slate-100 dark:stroke-slate-800"
+                        className="stroke-slate-100"
                         strokeWidth="5.5"
                         fill="transparent"
                       />
@@ -1648,10 +1648,10 @@ const Builder = () => {
                       />
                     </svg>
                     <div className="absolute flex flex-col items-center">
-                      <span className="text-[11px] font-extrabold text-slate-800 dark:text-slate-100 group-hover:scale-110 transition-transform duration-200">
+                      <span className="text-[11px] font-extrabold text-slate-900 group-hover:scale-110 transition-transform duration-200">
                         {animatedScore}%
                       </span>
-                      <span className="text-[6px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-none mt-0.5">
+                      <span className="text-[6px] font-bold text-slate-400 uppercase tracking-widest leading-none mt-0.5">
                         Click
                       </span>
                     </div>
@@ -1659,30 +1659,30 @@ const Builder = () => {
 
                   <div className="space-y-1 text-left min-w-0 flex-1">
                     <div className="flex items-center justify-between">
-                      <h5 className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                      <h5 className="text-xs font-bold text-slate-800">
                         {animatedScore >= 80 ? 'Excellent Match!' : animatedScore >= 60 ? 'Good Potential' : 'Needs Optimization'}
                       </h5>
                     </div>
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed truncate">
+                    <p className="text-[10px] text-slate-500 leading-relaxed truncate">
                       {atsMetadata.feedback && atsMetadata.feedback.length > 0
                         ? atsMetadata.feedback[0]
                         : 'Choose a JD above to calculate your keyword alignments.'}
                     </p>
                     <div className="text-[9px] text-slate-400 font-medium">
-                      AI rewrite credit usage: <span className="font-bold text-slate-600 dark:text-slate-300">{planStats.aiRewriteCount} / {planStats.aiLimit === Infinity ? 'Unlimited' : planStats.aiLimit}</span>
+                      AI rewrite credit usage: <span className="font-bold text-slate-700">{planStats.aiRewriteCount} / {planStats.aiLimit === Infinity ? 'Unlimited' : planStats.aiLimit}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* ATS Score History — Before / After / Improvement */}
-                <div className="bg-slate-50/70 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800/80 rounded-xl p-3 space-y-2.5">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2.5">
                   {/* Status Badge row */}
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Analysis Status</span>
                     <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full leading-none ${
                       hasOptimization
-                        ? 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20'
-                        : 'bg-slate-100 dark:bg-slate-800/85 text-slate-500 dark:text-slate-400'
+                        ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+                        : 'bg-slate-100 text-slate-600'
                     }`}>
                       {hasOptimization ? '✦ Optimized' : 'Initial Analysis'}
                     </span>
@@ -1690,33 +1690,33 @@ const Builder = () => {
 
                   {/* Before / After / Improvement row */}
                   {hasOptimization ? (
-                    <div className="flex items-center justify-between gap-1 pt-1 border-t border-slate-100 dark:border-slate-800/60">
+                    <div className="flex items-center justify-between gap-1 pt-1 border-t border-slate-100">
                       <div className="text-center flex-1">
                         <div className="text-[8.5px] font-bold text-slate-400 uppercase tracking-widest">Before</div>
-                        <div className="text-sm font-extrabold text-slate-600 dark:text-slate-300 mt-0.5">{initialAtsScore}%</div>
+                        <div className="text-sm font-extrabold text-slate-600 mt-0.5">{initialAtsScore}%</div>
                       </div>
-                      <div className="text-slate-300 dark:text-slate-700 text-xs">→</div>
+                      <div className="text-slate-300 text-xs">→</div>
                       <div className="text-center flex-1">
                         <div className="text-[8.5px] font-bold text-slate-400 uppercase tracking-widest">After</div>
-                        <div className="text-sm font-extrabold text-slate-800 dark:text-slate-100 mt-0.5">{optimizedAtsScore}%</div>
+                        <div className="text-sm font-extrabold text-slate-900 mt-0.5">{optimizedAtsScore}%</div>
                       </div>
-                      <div className="text-slate-300 dark:text-slate-700 text-xs shrink-0">|</div>
+                      <div className="text-slate-300 text-xs shrink-0">|</div>
                       <div className="text-center flex-1">
                         <div className="text-[8.5px] font-bold text-slate-400 uppercase tracking-widest">Change</div>
                         <div className={`text-sm font-extrabold mt-0.5 ${
                           scoreImprovement > 0
-                            ? 'text-emerald-600 dark:text-emerald-400'
+                            ? 'text-emerald-600'
                             : scoreImprovement < 0
-                              ? 'text-red-500 dark:text-red-400'
-                              : 'text-slate-500 dark:text-slate-400'
+                              ? 'text-red-500'
+                              : 'text-slate-500'
                         }`}>
                           {scoreImprovement > 0 ? `+${scoreImprovement}%` : `${scoreImprovement}%`}
                         </div>
                       </div>
                     </div>
                   ) : (
-                    <div className="flex items-center justify-between pt-1 border-t border-slate-100 dark:border-slate-800/60">
-                      <span className="text-[10px] text-slate-500 dark:text-slate-400">Current ATS Match</span>
+                    <div className="flex items-center justify-between pt-1 border-t border-slate-100">
+                      <span className="text-[10px] text-slate-500">Current ATS Match</span>
                       <span className={`text-sm font-extrabold ${
                         activeAtsScore >= 80 ? 'text-emerald-500' : activeAtsScore >= 60 ? 'text-amber-500' : 'text-red-500'
                       }`}>{activeAtsScore}%</span>
@@ -1725,7 +1725,7 @@ const Builder = () => {
                 </div>
 
                 {/* Resume Strength Dashboard with Readiness Indicator */}
-                <div className="bg-slate-50/70 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800/80 rounded-xl p-3 space-y-2">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2">
                   <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                     <span>ATS Readiness Index</span>
                     <span className={`${
@@ -1734,7 +1734,7 @@ const Builder = () => {
                       {animatedScore >= 80 ? 'Ready to Apply' : animatedScore >= 60 ? 'Good Match (Polish)' : 'Critical Gaps'}
                     </span>
                   </div>
-                  <div className="w-full bg-slate-200/50 dark:bg-slate-800/80 h-1.5 rounded-full overflow-hidden">
+                  <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
                     <div 
                       className={`h-full transition-all duration-700 rounded-full ${
                         animatedScore >= 80 ? 'bg-linear-to-r from-emerald-400 to-teal-500' : animatedScore >= 60 ? 'bg-amber-400' : 'bg-red-400'
@@ -1743,15 +1743,15 @@ const Builder = () => {
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-center text-[9px] pt-1">
-                    <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-1.5 rounded-lg">
+                    <div className="bg-white border border-slate-200 p-1.5 rounded-lg shadow-xs">
                       <div className="font-bold text-slate-400 uppercase tracking-widest text-[7.5px]">Matched</div>
-                      <div className="text-xs font-extrabold text-emerald-500 mt-0.5">
+                      <div className="text-xs font-extrabold text-emerald-600 mt-0.5">
                         {dynamicAtsData.matchedKeywords.length} keywords
                       </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-1.5 rounded-lg">
+                    <div className="bg-white border border-slate-200 p-1.5 rounded-lg shadow-xs">
                       <div className="font-bold text-slate-400 uppercase tracking-widest text-[7.5px]">Gaps</div>
-                      <div className="text-xs font-extrabold text-red-400 mt-0.5">
+                      <div className="text-xs font-extrabold text-red-500 mt-0.5">
                         {dynamicAtsData.missingKeywords.length} keywords
                       </div>
                     </div>
@@ -1761,21 +1761,21 @@ const Builder = () => {
                 <button
                   type="button"
                   onClick={() => setShowAtsReportModal(true)}
-                  className="w-full py-2 bg-linear-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-indigo-500/25 transition-all active:scale-95 cursor-pointer"
+                  className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-indigo-500/20 transition-all active:scale-95 cursor-pointer"
                 >
                   View Detailed ATS Report
                 </button>
 
                 {/* Keyword gaps list (Searchable, fully responsive) */}
-                <div className="space-y-2 pt-3 border-t border-slate-100 dark:border-slate-800/80">
+                <div className="space-y-2 pt-3 border-t border-slate-100">
                   <div className="flex items-center justify-between">
-                    <h6 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">ATS Keyword Visualizer</h6>
+                    <h6 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">ATS Keyword Visualizer</h6>
                     <input
                       type="text"
                       placeholder="Filter keywords..."
                       value={keywordSearch}
                       onChange={(e) => setKeywordSearch(e.target.value)}
-                      className="px-2 py-0.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-[9px] focus:outline-none focus:border-indigo-500 w-24 text-slate-800 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      className="px-2 py-0.5 bg-slate-50 border border-slate-200 rounded-lg text-[9px] focus:outline-none focus:border-indigo-500 w-24 text-slate-800 placeholder:text-slate-400"
                     />
                   </div>
                   <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-1">
@@ -1804,8 +1804,8 @@ const Builder = () => {
                           }}
                           className={`px-2 py-0.5 rounded-lg text-[9px] font-bold border flex items-center gap-1 transition-colors ${
                             kw.matched 
-                              ? 'bg-emerald-50/60 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900/30' 
-                              : 'bg-amber-50/60 dark:bg-amber-950/20 text-amber-700 dark:text-amber-400 border-amber-100 dark:border-amber-900/30 cursor-pointer hover:border-indigo-500'
+                              ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
+                              : 'bg-amber-50 text-amber-800 border-amber-200 cursor-pointer hover:border-indigo-500'
                           }`}
                           title={kw.matched ? "Successfully matched!" : "Click to optimize and inject using AI"}
                         >
@@ -1821,38 +1821,38 @@ const Builder = () => {
 
             {/* ATS Score History */}
             {hasOptimization && (
-              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
-                <h6 className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                  <RotateCcw className="w-3 h-3 text-indigo-500" />
+              <div className="mt-4 pt-3 border-t border-slate-100 space-y-2.5">
+                <h6 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                  <RotateCcw className="w-3 h-3 text-indigo-600" />
                   ATS Optimization History
                 </h6>
-                <div className="bg-linear-to-br from-indigo-50/40 to-emerald-50/20 dark:from-slate-950/45 dark:to-slate-900/25 border border-slate-200/50 dark:border-slate-800/80 p-3.5 rounded-2xl space-y-3">
+                <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl space-y-3">
                   <div className="grid grid-cols-3 gap-2.5 text-center">
                     {/* Before Optimization */}
-                    <div className="bg-white/60 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800/60 p-2 rounded-xl">
-                      <div className="text-[8px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Before</div>
-                      <div className="text-sm font-extrabold text-slate-500 dark:text-slate-400 mt-0.5">
+                    <div className="bg-white border border-slate-200 p-2 rounded-xl shadow-xs">
+                      <div className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Before</div>
+                      <div className="text-sm font-extrabold text-slate-600 mt-0.5">
                         {initialAtsScore}%
                       </div>
                     </div>
                     {/* After Optimization */}
-                    <div className="bg-white dark:bg-slate-950 border border-indigo-100 dark:border-indigo-900/60 p-2 rounded-xl shadow-sm relative overflow-hidden group">
+                    <div className="bg-white border border-indigo-200 p-2 rounded-xl shadow-xs relative overflow-hidden group">
                       <div className="absolute top-0 right-0 w-8 h-8 bg-indigo-500/10 rounded-full blur-sm" />
-                      <div className="text-[8px] font-bold text-indigo-500 uppercase tracking-wider">After AI</div>
-                      <div className="text-sm font-extrabold text-indigo-600 dark:text-indigo-400 mt-0.5">
+                      <div className="text-[8px] font-bold text-indigo-600 uppercase tracking-wider">After AI</div>
+                      <div className="text-sm font-extrabold text-indigo-600 mt-0.5">
                         {optimizedAtsScore}%
                       </div>
                     </div>
                     {/* Improvement */}
-                    <div className="bg-white/60 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800/60 p-2 rounded-xl flex flex-col justify-center items-center">
-                      <div className="text-[8px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Gain</div>
-                      <div className="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-full text-[9px] font-bold mt-1">
+                    <div className="bg-white border border-slate-200 p-2 rounded-xl flex flex-col justify-center items-center shadow-xs">
+                      <div className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Gain</div>
+                      <div className="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-emerald-50 text-emerald-700 rounded-full text-[9px] font-bold mt-1">
                         <ArrowUp className="w-2.5 h-2.5 stroke-[3px]" />
                         <span>+{scoreImprovement}%</span>
                       </div>
                     </div>
                   </div>
-                  <p className="text-[9px] text-slate-400 dark:text-slate-500 leading-relaxed font-medium">
+                  <p className="text-[9px] text-slate-500 leading-relaxed font-medium">
                     This resume has been optimized with AI. Recalculate anytime to verify matches.
                   </p>
                 </div>
@@ -1942,16 +1942,16 @@ const Builder = () => {
             />
 
             {/* 9. SECTION SORTING AND LAYOUT STRUCTURE WIDGET */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/60 rounded-2xl overflow-hidden shadow-sm">
+            <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
               <button
                 onClick={() => toggleAccordion('layout')}
-                className="w-full px-5 py-4 flex items-center justify-between font-bold font-display text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-950/40 transition-colors"
+                className="w-full px-5 py-4 flex items-center justify-between font-bold font-display text-sm text-slate-800 hover:bg-slate-50 transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <Laptop className="w-4 h-4 text-indigo-500" />
+                  <Laptop className="w-4 h-4 text-indigo-600" />
                   <span>Section Layout Ordering</span>
                 </div>
-                {activeAccordion === 'layout' ? <ChevronUp className="w-4.5 h-4.5" /> : <ChevronDown className="w-4.5 h-4.5" />}
+                {activeAccordion === 'layout' ? <ChevronUp className="w-4.5 h-4.5 text-slate-600" /> : <ChevronDown className="w-4.5 h-4.5 text-slate-600" />}
               </button>
 
               <AnimatePresence>
@@ -1960,10 +1960,10 @@ const Builder = () => {
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
                     exit={{ height: 0 }}
-                    className="overflow-hidden border-t border-slate-100 dark:border-slate-800/80"
+                    className="overflow-hidden border-t border-slate-100"
                   >
                     <div className="p-5 space-y-3 text-left">
-                      <p className="text-xs text-slate-400 mb-2 leading-relaxed">
+                      <p className="text-xs text-slate-500 mb-2 leading-relaxed">
                         Drag or sort sections to adjust layout hierarchy. Recalculates resume structure in real-time.
                       </p>
                       
@@ -1971,15 +1971,15 @@ const Builder = () => {
                         {sectionOrder.map((sectionName, idx) => (
                           <div 
                             key={sectionName} 
-                            className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800 rounded-xl"
+                            className="flex items-center justify-between p-2.5 bg-slate-50 border border-slate-200 rounded-xl"
                           >
-                            <span className="text-xs font-bold text-slate-700 dark:text-slate-300 capitalize">{sectionName}</span>
+                            <span className="text-xs font-bold text-slate-800 capitalize">{sectionName}</span>
                             <div className="flex items-center gap-1">
                               <button
                                 type="button"
                                 disabled={idx === 0}
                                 onClick={() => moveSection(idx, -1)}
-                                className="p-1 hover:bg-slate-200 dark:hover:bg-slate-800 rounded text-slate-400 hover:text-slate-600 disabled:opacity-30 cursor-pointer"
+                                className="p-1 hover:bg-slate-200 rounded text-slate-400 hover:text-slate-600 disabled:opacity-30 cursor-pointer"
                               >
                                 <ArrowUp className="w-3.5 h-3.5" />
                               </button>
@@ -1987,7 +1987,7 @@ const Builder = () => {
                                 type="button"
                                 disabled={idx === sectionOrder.length - 1}
                                 onClick={() => moveSection(idx, 1)}
-                                className="p-1 hover:bg-slate-200 dark:hover:bg-slate-800 rounded text-slate-400 hover:text-slate-600 disabled:opacity-30 cursor-pointer"
+                                className="p-1 hover:bg-slate-200 rounded text-slate-400 hover:text-slate-600 disabled:opacity-30 cursor-pointer"
                               >
                                 <ArrowDown className="w-3.5 h-3.5" />
                               </button>
@@ -2007,11 +2007,11 @@ const Builder = () => {
         {/* RIGHT WORKSPACE: Real-time Live Resume Preview Panel */}
         <motion.div 
           variants={slideUp}
-          className="flex-1 bg-slate-200/50 dark:bg-slate-900/30 overflow-y-auto p-6 md:p-8 flex justify-center items-start"
+          className="flex-1 bg-slate-100/70 border-l border-slate-200 overflow-y-auto p-6 md:p-8 flex justify-center items-start"
         >
           
           {/* Main Visual Render Page sheet standard */}
-          <div id="resume-preview-sheet" className={`w-full max-w-200 min-h-245 bg-white dark:bg-slate-950 text-slate-950 dark:text-slate-50 shadow-xl border border-slate-300/40 dark:border-slate-800/80 rounded-lg ${dynamicStyles.sheetPadding} flex flex-col justify-start text-left relative overflow-hidden transition-all duration-300`}>
+          <div id="resume-preview-sheet" className={`w-full max-w-200 min-h-245 bg-white text-slate-900 shadow-xl border border-slate-200 rounded-lg ${dynamicStyles.sheetPadding} flex flex-col justify-start text-left relative overflow-hidden transition-all duration-300`}>
             
             {/* Header branding overlay */}
             <div className={`absolute top-0 left-0 right-0 h-1 transition-all duration-500 ${
@@ -2034,16 +2034,16 @@ const Builder = () => {
                 <div className="flex flex-col justify-start w-full">
               {/* Dynamic Header Section (Personal details) based on templateId */}
               {templateId === 'modern' ? (
-                <header className="pb-6 border-b border-slate-200/50 dark:border-slate-800 flex flex-col sm:flex-row justify-between sm:items-end font-sans">
+                <header className="pb-6 border-b border-slate-200 flex flex-col sm:flex-row justify-between sm:items-end font-sans">
                   <div>
-                    <h1 className="font-display font-extrabold tracking-tight text-slate-900 dark:text-slate-100 text-2xl sm:text-3xl">
+                    <h1 className="font-display font-extrabold tracking-tight text-slate-900 text-2xl sm:text-3xl">
                       {personalInfo.fullName || 'YOUR FULL NAME'}
                     </h1>
-                    <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mt-1 tracking-wide">
+                    <p className="text-sm font-semibold text-indigo-600 mt-1 tracking-wide">
                       {personalInfo.title || experience[0]?.position || 'Target Professional Role'}
                     </p>
                   </div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 space-y-1 mt-4 sm:mt-0 sm:text-right font-sans">
+                  <div className="text-xs text-slate-500 space-y-1 mt-4 sm:mt-0 sm:text-right font-sans">
                     {personalInfo.email ? (
                       <a href={`mailto:${personalInfo.email}`} className="hover:underline block text-inherit break-all">
                         {personalInfo.email}
@@ -2088,14 +2088,14 @@ const Builder = () => {
                   </div>
                 </header>
               ) : templateId === 'minimalist' ? (
-                <header className="pb-5 border-b border-slate-200 dark:border-slate-800 text-left font-sans">
-                  <h1 className="text-2xl font-bold tracking-wider text-slate-900 dark:text-slate-100 uppercase font-sans">
+                <header className="pb-5 border-b border-slate-200 text-left font-sans">
+                  <h1 className="text-2xl font-bold tracking-wider text-slate-900 uppercase font-sans">
                     {personalInfo.fullName || 'YOUR FULL NAME'}
                   </h1>
-                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-450 tracking-[0.2em] font-sans mt-0.5">
+                  <p className="text-xs font-semibold text-slate-500 tracking-[0.2em] font-sans mt-0.5">
                     {personalInfo.title || experience[0]?.position || 'Target Professional Role'}
                   </p>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-slate-450 dark:text-slate-500 font-normal tracking-wide pt-2.5 font-sans">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-slate-500 font-normal tracking-wide pt-2.5 font-sans">
                     {personalInfo.email ? (
                       <a href={`mailto:${personalInfo.email}`} className="hover:underline text-inherit break-all">
                         {personalInfo.email}
@@ -2148,13 +2148,13 @@ const Builder = () => {
                 </header>
               ) : (
                 <header className="pb-5 text-center font-serif">
-                  <h1 className="font-serif font-bold text-3xl text-slate-950 dark:text-slate-50 tracking-tight leading-tight">
+                  <h1 className="font-serif font-bold text-3xl text-slate-900 tracking-tight leading-tight">
                     {personalInfo.fullName || 'YOUR FULL NAME'}
                   </h1>
-                  <p className="text-xs italic font-serif text-slate-700 dark:text-slate-400 mt-1 tracking-wider">
+                  <p className="text-xs italic font-serif text-slate-700 mt-1 tracking-wider">
                     {personalInfo.title || experience[0]?.position || 'Target Professional Role'}
                   </p>
-                  <div className="flex flex-wrap items-center justify-center gap-x-2.5 mt-2.5 text-[11px] text-slate-600 dark:text-slate-400 font-serif">
+                  <div className="flex flex-wrap items-center justify-center gap-x-2.5 mt-2.5 text-[11px] text-slate-600 font-serif">
                     {personalInfo.email ? (
                       <a href={`mailto:${personalInfo.email}`} className="hover:underline text-inherit break-all">
                         {personalInfo.email}
@@ -2204,34 +2204,34 @@ const Builder = () => {
                       </span>
                     )}
                   </div>
-                  <div className="border-b-2 border-slate-950 dark:border-slate-800 mt-4.5 w-full" />
+                  <div className="border-b-2 border-slate-900 mt-4.5 w-full" />
                 </header>
               )}
 
               {/* Dynamic Render Loop of active sections based on sectionOrder */}
               <div className={`${dynamicStyles.sectionMargin} ${dynamicStyles.sectionSpace}`}>
                 {sectionOrder.map((sectionName) => {
-                               // Summary Section
+                  // Summary Section
                   if (sectionName === 'summary' && summary) {
                     return (
                       <section key="summary" className={dynamicStyles.itemSpace}>
                         {templateId === 'modern' ? (
-                          <h2 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
+                          <h2 className="text-xs font-bold text-indigo-600 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
                             Professional Summary
                           </h2>
                         ) : templateId === 'minimalist' ? (
-                          <h2 className="text-[11px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-[0.2em] border-b border-slate-200 dark:border-slate-800 pb-1.5 font-sans">
+                          <h2 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] border-b border-slate-200 pb-1.5 font-sans">
                             Professional Summary
                           </h2>
                         ) : (
-                          <h2 className="text-xs font-bold text-slate-950 dark:text-slate-50 uppercase tracking-wider border-b-2 border-slate-950 dark:border-slate-805 pb-0.5 font-serif">
+                          <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5 font-serif">
                             Professional Summary
                           </h2>
                         )}
                         <p className={`text-xs leading-relaxed wrap-break-word ${
-                          templateId === 'modern' ? 'text-slate-600 dark:text-slate-300 font-sans' :
-                          templateId === 'minimalist' ? 'text-slate-600 dark:text-slate-400 font-normal font-sans' :
-                          'text-slate-700 dark:text-slate-300 font-serif'
+                          templateId === 'modern' ? 'text-slate-700 font-sans' :
+                          templateId === 'minimalist' ? 'text-slate-700 font-normal font-sans' :
+                          'text-slate-700 font-serif'
                         }`}>
                           {summary}
                         </p>
@@ -2244,15 +2244,15 @@ const Builder = () => {
                     return (
                       <section key="experience" className={dynamicStyles.itemSpace}>
                         {templateId === 'modern' ? (
-                          <h2 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
+                          <h2 className="text-xs font-bold text-indigo-600 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
                             Professional Experience
                           </h2>
                         ) : templateId === 'minimalist' ? (
-                          <h2 className="text-[11px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-[0.2em] border-b border-slate-200 dark:border-slate-800 pb-1.5 font-sans">
+                          <h2 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] border-b border-slate-200 pb-1.5 font-sans">
                             Professional Experience
                           </h2>
                         ) : (
-                          <h2 className="text-xs font-bold text-slate-950 dark:text-slate-50 uppercase tracking-wider border-b-2 border-slate-950 dark:border-slate-805 pb-0.5 font-serif">
+                          <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5 font-serif">
                             Professional Experience
                           </h2>
                         )}
@@ -2263,17 +2263,17 @@ const Builder = () => {
                                 <div key={idx} className="space-y-1 font-sans">
                                   <div className="flex justify-between items-start text-xs font-sans">
                                     <div>
-                                      <span className="font-bold text-slate-900 dark:text-slate-100">{exp.position || 'Position Title'}</span>
-                                      <span className="mx-1.5 text-slate-350 dark:text-slate-700">|</span>
-                                      <span className="font-semibold text-slate-600 dark:text-slate-400">{exp.company || 'Company'}</span>
+                                      <span className="font-bold text-slate-900">{exp.position || 'Position Title'}</span>
+                                      <span className="mx-1.5 text-slate-400">|</span>
+                                      <span className="font-semibold text-slate-700">{exp.company || 'Company'}</span>
                                     </div>
-                                    <span className="text-[10px] text-slate-400 whitespace-nowrap">
+                                    <span className="text-[10px] text-slate-500 whitespace-nowrap">
                                       {exp.startDate || 'Date'} — {exp.current ? 'Present' : exp.endDate || 'Date'}
                                     </span>
                                   </div>
-                                  {exp.location && <p className="text-[10px] text-slate-400 font-sans">{exp.location}</p>}
+                                  {exp.location && <p className="text-[10px] text-slate-500 font-sans">{exp.location}</p>}
                                   {exp.description && (
-                                    <ul className="list-disc pl-4 text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-1 font-sans wrap-break-word">
+                                    <ul className="list-disc pl-4 text-xs text-slate-700 space-y-1 pt-1 font-sans wrap-break-word">
                                       {exp.description.split('\n').map((bullet, bIdx) => (
                                         <li key={bIdx} className="wrap-break-word">{bullet.replace(/^- /, '')}</li>
                                       ))}
@@ -2286,17 +2286,17 @@ const Builder = () => {
                                 <div key={idx} className="space-y-1 font-sans text-xs">
                                   <div className="flex justify-between items-baseline font-sans">
                                     <div>
-                                      <span className="font-bold text-slate-900 dark:text-slate-100">{exp.position || 'Position Title'}</span>
-                                      <span className="mx-1.5 text-slate-400 dark:text-slate-700">·</span>
-                                      <span className="font-normal text-slate-600 dark:text-slate-400">{exp.company || 'Company'}</span>
-                                      {exp.location && <span className="text-[10px] text-slate-450 dark:text-slate-500 font-normal ml-2">({exp.location})</span>}
+                                      <span className="font-bold text-slate-900">{exp.position || 'Position Title'}</span>
+                                      <span className="mx-1.5 text-slate-400">·</span>
+                                      <span className="font-normal text-slate-700">{exp.company || 'Company'}</span>
+                                      {exp.location && <span className="text-[10px] text-slate-500 font-normal ml-2">({exp.location})</span>}
                                     </div>
-                                    <span className="text-[10px] text-slate-450 dark:text-slate-500 font-normal whitespace-nowrap">
+                                    <span className="text-[10px] text-slate-500 font-normal whitespace-nowrap">
                                       {exp.startDate || 'Date'} — {exp.current ? 'Present' : exp.endDate || 'Date'}
                                     </span>
                                   </div>
                                   {exp.description && (
-                                    <ul className="list-disc pl-4 text-xs text-slate-600 dark:text-slate-400 space-y-0.5 pt-0.5 font-sans wrap-break-word">
+                                    <ul className="list-disc pl-4 text-xs text-slate-700 space-y-0.5 pt-0.5 font-sans wrap-break-word">
                                       {exp.description.split('\n').map((bullet, bIdx) => (
                                         <li key={bIdx} className="wrap-break-word">{bullet.replace(/^- /, '')}</li>
                                       ))}
@@ -2305,23 +2305,22 @@ const Builder = () => {
                                 </div>
                               );
                             } else {
-                              // classic traditional Wall Street layout (school/company left, date/location right)
                               return (
                                 <div key={idx} className="space-y-0.5 font-serif text-xs">
                                   <div className="flex justify-between items-baseline font-serif">
-                                    <span className="font-bold text-slate-950 dark:text-slate-50">{exp.company || 'Company'}</span>
-                                    <span className="text-[11px] text-slate-650 dark:text-slate-400 italic">
+                                    <span className="font-bold text-slate-900">{exp.company || 'Company'}</span>
+                                    <span className="text-[11px] text-slate-600 italic">
                                       {exp.location || 'Location'}
                                     </span>
                                   </div>
                                   <div className="flex justify-between items-baseline font-serif text-[11px]">
-                                    <span className="italic text-slate-750 dark:text-slate-350">{exp.position || 'Position Title'}</span>
-                                    <span className="text-[10px] text-slate-600 dark:text-slate-450 whitespace-nowrap">
+                                    <span className="italic text-slate-800">{exp.position || 'Position Title'}</span>
+                                    <span className="text-[10px] text-slate-500 whitespace-nowrap">
                                       {exp.startDate || 'Date'} — {exp.current ? 'Present' : exp.endDate || 'Date'}
                                     </span>
                                   </div>
                                   {exp.description && (
-                                    <ul className="list-disc pl-4 text-[11px] text-slate-700 dark:text-slate-300 space-y-0.5 pt-0.5 font-serif wrap-break-word">
+                                    <ul className="list-disc pl-4 text-[11px] text-slate-700 space-y-0.5 pt-0.5 font-serif wrap-break-word">
                                       {exp.description.split('\n').map((bullet, bIdx) => (
                                         <li key={bIdx} className="wrap-break-word">{bullet.replace(/^- /, '')}</li>
                                       ))}
@@ -2341,15 +2340,15 @@ const Builder = () => {
                     return (
                       <section key="education" className={dynamicStyles.itemSpace}>
                         {templateId === 'modern' ? (
-                          <h2 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
+                          <h2 className="text-xs font-bold text-indigo-600 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
                             Education
                           </h2>
                         ) : templateId === 'minimalist' ? (
-                          <h2 className="text-[11px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-[0.2em] border-b border-slate-200 dark:border-slate-800 pb-1.5 font-sans">
+                          <h2 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] border-b border-slate-200 pb-1.5 font-sans">
                             Education
                           </h2>
                         ) : (
-                          <h2 className="text-xs font-bold text-slate-950 dark:text-slate-50 uppercase tracking-wider border-b-2 border-slate-950 dark:border-slate-805 pb-0.5 font-serif">
+                          <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5 font-serif">
                             Education
                           </h2>
                         )}
@@ -2359,12 +2358,12 @@ const Builder = () => {
                               return (
                                 <div key={idx} className="flex justify-between items-start text-xs font-sans">
                                   <div>
-                                    <span className="font-bold text-slate-850 dark:text-slate-200">{edu.degree || 'Degree Major'}</span>
-                                    <span className="mx-1.5 text-slate-350 dark:text-slate-700">|</span>
-                                    <span className="font-semibold text-slate-600 dark:text-slate-400">{edu.school || 'School'}</span>
-                                    {edu.location && <span className="text-[10px] text-slate-400 ml-2">({edu.location})</span>}
+                                    <span className="font-bold text-slate-900">{edu.degree || 'Degree Major'}</span>
+                                    <span className="mx-1.5 text-slate-400">|</span>
+                                    <span className="font-semibold text-slate-700">{edu.school || 'School'}</span>
+                                    {edu.location && <span className="text-[10px] text-slate-500 ml-2">({edu.location})</span>}
                                   </div>
-                                  <span className="text-[10px] text-slate-400 whitespace-nowrap">
+                                  <span className="text-[10px] text-slate-500 whitespace-nowrap">
                                     {edu.startDate || 'Date'} — {edu.endDate || 'Date'}
                                   </span>
                                 </div>
@@ -2374,30 +2373,29 @@ const Builder = () => {
                                 <div key={idx} className="space-y-0.5 text-xs font-sans">
                                   <div className="flex justify-between items-baseline font-sans">
                                     <div>
-                                      <span className="font-bold text-slate-900 dark:text-slate-100">{edu.degree || 'Degree Major'}</span>
-                                      <span className="mx-1.5 text-slate-400 dark:text-slate-750">·</span>
-                                      <span className="font-normal text-slate-600 dark:text-slate-400">{edu.school || 'School'}</span>
-                                      {edu.location && <span className="text-[10px] text-slate-450 dark:text-slate-500 font-normal ml-2">({edu.location})</span>}
+                                      <span className="font-bold text-slate-900">{edu.degree || 'Degree Major'}</span>
+                                      <span className="mx-1.5 text-slate-400">·</span>
+                                      <span className="font-normal text-slate-700">{edu.school || 'School'}</span>
+                                      {edu.location && <span className="text-[10px] text-slate-500 font-normal ml-2">({edu.location})</span>}
                                     </div>
-                                    <span className="text-[10px] text-slate-450 dark:text-slate-500 font-normal whitespace-nowrap">
+                                    <span className="text-[10px] text-slate-500 font-normal whitespace-nowrap">
                                       {edu.startDate} — {edu.endDate}
                                     </span>
                                   </div>
                                 </div>
                               );
                             } else {
-                              // classic traditional Wall Street style
                               return (
                                 <div key={idx} className="space-y-0.5 font-serif text-xs">
                                   <div className="flex justify-between items-baseline font-serif">
-                                    <span className="font-bold text-slate-950 dark:text-slate-50">{edu.school || 'School'}</span>
-                                    <span className="text-[11px] text-slate-650 dark:text-slate-400 italic">
+                                    <span className="font-bold text-slate-900">{edu.school || 'School'}</span>
+                                    <span className="text-[11px] text-slate-600 italic">
                                       {edu.location || 'Location'}
                                     </span>
                                   </div>
                                   <div className="flex justify-between items-baseline font-serif text-[11px]">
-                                    <span className="italic text-slate-750 dark:text-slate-350">{edu.degree || 'Degree Major'}</span>
-                                    <span className="text-[10px] text-slate-600 dark:text-slate-450 whitespace-nowrap">
+                                    <span className="italic text-slate-800">{edu.degree || 'Degree Major'}</span>
+                                    <span className="text-[10px] text-slate-500 whitespace-nowrap">
                                       {edu.startDate || 'Date'} — {edu.endDate || 'Date'}
                                     </span>
                                   </div>
@@ -2415,15 +2413,15 @@ const Builder = () => {
                     return (
                       <section key="skills" className={dynamicStyles.itemSpace}>
                         {templateId === 'modern' ? (
-                          <h2 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
+                          <h2 className="text-xs font-bold text-indigo-600 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
                             Skills
                           </h2>
                         ) : templateId === 'minimalist' ? (
-                          <h2 className="text-[11px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-[0.2em] border-b border-slate-200 dark:border-slate-800 pb-1.5 font-sans">
+                          <h2 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] border-b border-slate-200 pb-1.5 font-sans">
                             Skills
                           </h2>
                         ) : (
-                          <h2 className="text-xs font-bold text-slate-950 dark:text-slate-50 uppercase tracking-wider border-b-2 border-slate-950 dark:border-slate-805 pb-0.5 font-serif">
+                          <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5 font-serif">
                             Skills
                           </h2>
                         )}
@@ -2432,11 +2430,11 @@ const Builder = () => {
                             if (templateId === 'modern') {
                               return (
                                 <div key={idx} className="grid grid-cols-1 sm:grid-cols-12 gap-1.5 font-sans text-xs">
-                                  <span className="sm:col-span-3 font-bold text-slate-700 dark:text-slate-300 capitalize wrap-break-word">{skill.name || 'Group'}:</span>
+                                  <span className="sm:col-span-3 font-bold text-slate-900 capitalize wrap-break-word">{skill.name || 'Group'}:</span>
                                   <div className="sm:col-span-9">
                                     <div className="flex flex-wrap gap-1.5 pt-0.5">
                                       {skill.keywords && skill.keywords.map((kw, kwIdx) => (
-                                        <span key={kwIdx} className="bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900/50 px-2 py-0.5 rounded-full text-[10px] font-medium break-all">
+                                        <span key={kwIdx} className="bg-indigo-50 text-indigo-700 border border-indigo-200 px-2 py-0.5 rounded-full text-[10px] font-medium break-all">
                                           {kw}
                                         </span>
                                       ))}
@@ -2447,10 +2445,10 @@ const Builder = () => {
                             } else if (templateId === 'minimalist') {
                               return (
                                 <div key={idx} className="flex flex-col sm:flex-row sm:items-start gap-1 font-sans text-xs">
-                                  <span className="font-bold text-slate-900 dark:text-slate-100 w-28 shrink-0 capitalize wrap-break-word">{skill.name || 'Group'}:</span>
+                                  <span className="font-bold text-slate-900 w-28 shrink-0 capitalize wrap-break-word">{skill.name || 'Group'}:</span>
                                   <div className="flex flex-wrap gap-x-2 gap-y-1">
                                     {skill.keywords && skill.keywords.map((kw, kwIdx) => (
-                                      <span key={kwIdx} className="text-slate-600 dark:text-slate-400 font-normal break-all">
+                                      <span key={kwIdx} className="text-slate-700 font-normal break-all">
                                         {kw}{kwIdx < skill.keywords.length - 1 ? ' ·' : ''}
                                       </span>
                                     ))}
@@ -2458,13 +2456,12 @@ const Builder = () => {
                                 </div>
                               );
                             } else {
-                              // classic traditional
                               return (
                                 <div key={idx} className="flex flex-col sm:flex-row sm:items-baseline gap-1 font-serif text-xs">
-                                  <span className="font-bold text-slate-950 dark:text-slate-100 w-32 shrink-0 capitalize wrap-break-word">{skill.name || 'Group'}:</span>
+                                  <span className="font-bold text-slate-900 w-32 shrink-0 capitalize wrap-break-word">{skill.name || 'Group'}:</span>
                                   <div className="flex flex-wrap gap-x-1.5 gap-y-1">
                                     {skill.keywords && skill.keywords.map((kw, kwIdx) => (
-                                      <span key={kwIdx} className="text-slate-700 dark:text-slate-350 break-all">
+                                      <span key={kwIdx} className="text-slate-800 break-all">
                                         {kw}{kwIdx < skill.keywords.length - 1 ? ',' : ''}
                                       </span>
                                     ))}
@@ -2483,15 +2480,15 @@ const Builder = () => {
                     return (
                       <section key="projects" className={dynamicStyles.itemSpace}>
                         {templateId === 'modern' ? (
-                          <h2 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
+                          <h2 className="text-xs font-bold text-indigo-600 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
                             Projects
                           </h2>
                         ) : templateId === 'minimalist' ? (
-                          <h2 className="text-[11px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-[0.2em] border-b border-slate-200 dark:border-slate-800 pb-1.5 font-sans">
+                          <h2 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] border-b border-slate-200 pb-1.5 font-sans">
                             Projects
                           </h2>
                         ) : (
-                          <h2 className="text-xs font-bold text-slate-950 dark:text-slate-50 uppercase tracking-wider border-b-2 border-slate-950 dark:border-slate-805 pb-0.5 font-serif">
+                          <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5 font-serif">
                             Projects
                           </h2>
                         )}
@@ -2502,18 +2499,18 @@ const Builder = () => {
                                 <div key={idx} className="space-y-1 text-xs font-sans">
                                   <div className="flex justify-between items-center">
                                     <div className="flex items-center gap-1.5">
-                                      <span className="font-bold text-slate-800 dark:text-slate-200">{proj.title || 'Project Title'}</span>
-                                      {proj.role && <span className="text-[10px] text-slate-400">({proj.role})</span>}
+                                      <span className="font-bold text-slate-900">{proj.title || 'Project Title'}</span>
+                                      {proj.role && <span className="text-[10px] text-slate-500">({proj.role})</span>}
                                       {proj.url && (
-                                        <span className="text-[10px] text-indigo-500 flex items-center gap-0.5">
+                                        <span className="text-[10px] text-indigo-600 flex items-center gap-0.5">
                                           <ExternalLink className="w-2.5 h-2.5" />
                                         </span>
                                       )}
                                     </div>
-                                    <span className="text-[10px] text-slate-400">{proj.startDate}</span>
+                                    <span className="text-[10px] text-slate-500">{proj.startDate}</span>
                                   </div>
                                   {proj.description && (
-                                    <ul className="list-disc pl-4 text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-1 font-sans wrap-break-word">
+                                    <ul className="list-disc pl-4 text-xs text-slate-700 space-y-1 pt-1 font-sans wrap-break-word">
                                       {proj.description
                                         .split('\n')
                                         .map((bullet) => bullet.trim())
@@ -2530,13 +2527,13 @@ const Builder = () => {
                                 <div key={idx} className="space-y-1 text-xs font-sans">
                                   <div className="flex justify-between items-baseline">
                                     <div className="flex items-baseline gap-2 font-sans">
-                                      <span className="font-bold text-slate-900 dark:text-slate-100 wrap-break-word">{proj.title || 'Project Title'}</span>
-                                      {proj.role && <span className="text-[10px] text-slate-500 dark:text-slate-400 font-normal wrap-break-word">({proj.role})</span>}
+                                      <span className="font-bold text-slate-900 wrap-break-word">{proj.title || 'Project Title'}</span>
+                                      {proj.role && <span className="text-[10px] text-slate-500 font-normal wrap-break-word">({proj.role})</span>}
                                     </div>
-                                    <span className="text-[10px] text-slate-450 dark:text-slate-500 font-normal">{proj.startDate}</span>
+                                    <span className="text-[10px] text-slate-500 font-normal">{proj.startDate}</span>
                                   </div>
                                   {proj.description && (
-                                    <ul className="list-disc pl-4 text-xs text-slate-600 dark:text-slate-400 space-y-0.5 pt-0.5 font-sans wrap-break-word">
+                                    <ul className="list-disc pl-4 text-xs text-slate-700 space-y-0.5 pt-0.5 font-sans wrap-break-word">
                                       {proj.description
                                         .split('\n')
                                         .map((bullet) => bullet.trim())
@@ -2549,18 +2546,17 @@ const Builder = () => {
                                 </div>
                               );
                             } else {
-                              // classic traditional
                               return (
                                 <div key={idx} className="space-y-0.5 text-xs font-serif">
                                   <div className="flex justify-between items-baseline font-serif">
                                     <div className="flex items-baseline gap-2 font-serif">
-                                      <span className="font-bold text-slate-950 dark:text-slate-50 wrap-break-word">{proj.title || 'Project Title'}</span>
-                                      {proj.role && <span className="text-[11px] text-slate-650 dark:text-slate-400 italic wrap-break-word">({proj.role})</span>}
+                                      <span className="font-bold text-slate-900 wrap-break-word">{proj.title || 'Project Title'}</span>
+                                      {proj.role && <span className="text-[11px] text-slate-700 italic wrap-break-word">({proj.role})</span>}
                                     </div>
-                                    <span className="text-[10px] text-slate-600 dark:text-slate-450 italic">{proj.startDate}</span>
+                                    <span className="text-[10px] text-slate-500 italic">{proj.startDate}</span>
                                   </div>
                                   {proj.description && (
-                                    <ul className="list-disc pl-4 text-[11px] text-slate-700 dark:text-slate-300 space-y-0.5 pt-0.5 font-serif wrap-break-word">
+                                    <ul className="list-disc pl-4 text-[11px] text-slate-700 space-y-0.5 pt-0.5 font-serif wrap-break-word">
                                       {proj.description
                                         .split('\n')
                                         .map((bullet) => bullet.trim())
@@ -2584,15 +2580,15 @@ const Builder = () => {
                     return (
                       <section key="certifications" className={dynamicStyles.itemSpace}>
                         {templateId === 'modern' ? (
-                          <h2 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
+                          <h2 className="text-xs font-bold text-indigo-600 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
                             Certifications
                           </h2>
                         ) : templateId === 'minimalist' ? (
-                          <h2 className="text-[11px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-[0.2em] border-b border-slate-200 dark:border-slate-800 pb-1.5 font-sans">
+                          <h2 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] border-b border-slate-200 pb-1.5 font-sans">
                             Certifications
                           </h2>
                         ) : (
-                          <h2 className="text-xs font-bold text-slate-950 dark:text-slate-50 uppercase tracking-wider border-b-2 border-slate-950 dark:border-slate-805 pb-0.5 font-serif">
+                          <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5 font-serif">
                             Certifications
                           </h2>
                         )}
@@ -2602,37 +2598,37 @@ const Builder = () => {
                               return (
                                 <div key={idx} className="flex justify-between items-center text-xs font-sans">
                                   <div className="flex items-center gap-1.5">
-                                    <span className="font-bold text-slate-800 dark:text-slate-200">{cert.name || 'Certification Name'}</span>
+                                    <span className="font-bold text-slate-900">{cert.name || 'Certification Name'}</span>
                                     <span className="text-slate-400">—</span>
-                                    <span className="text-slate-600 dark:text-slate-400">{cert.issuer}</span>
+                                    <span className="text-slate-700">{cert.issuer}</span>
                                     {cert.url && (
-                                      <span className="text-[10px] text-indigo-500 flex items-center gap-0.5">
+                                      <span className="text-[10px] text-indigo-600 flex items-center gap-0.5">
                                         <ExternalLink className="w-2.5 h-2.5" />
                                       </span>
                                     )}
                                   </div>
-                                  <span className="text-[10px] text-slate-400">{cert.date}</span>
+                                  <span className="text-[10px] text-slate-500">{cert.date}</span>
                                 </div>
                               );
                             } else if (templateId === 'minimalist') {
                               return (
                                 <div key={idx} className="flex justify-between items-baseline text-xs font-sans">
                                   <div className="flex gap-2">
-                                    <span className="font-bold text-slate-900 dark:text-slate-100">{cert.name || 'Certification Name'}</span>
+                                    <span className="font-bold text-slate-900">{cert.name || 'Certification Name'}</span>
                                     <span className="text-slate-500 font-normal">· {cert.issuer}</span>
                                   </div>
-                                  <span className="text-[10px] text-slate-450 font-normal">{cert.date}</span>
+                                  <span className="text-[10px] text-slate-500 font-normal">{cert.date}</span>
                                 </div>
                               );
                             } else {
                               return (
                                 <div key={idx} className="flex justify-between items-baseline text-xs font-serif">
                                   <div>
-                                    <span className="font-bold text-slate-950 dark:text-slate-50">{cert.name || 'Certification Name'}</span>
-                                    <span className="text-slate-500 mx-1.5">,</span>
-                                    <span className="text-slate-700 dark:text-slate-350 italic">{cert.issuer}</span>
+                                    <span className="font-bold text-slate-900">{cert.name || 'Certification Name'}</span>
+                                    <span className="text-slate-400 mx-1.5">,</span>
+                                    <span className="text-slate-700 italic">{cert.issuer}</span>
                                   </div>
-                                  <span className="text-[10px] text-slate-600 dark:text-slate-450">{cert.date}</span>
+                                  <span className="text-[10px] text-slate-500">{cert.date}</span>
                                 </div>
                               );
                             }
@@ -2647,15 +2643,15 @@ const Builder = () => {
                     return (
                       <section key="languages" className={dynamicStyles.itemSpace}>
                         {templateId === 'modern' ? (
-                          <h2 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
+                          <h2 className="text-xs font-bold text-indigo-600 uppercase tracking-widest border-l-4 border-indigo-500 pl-3">
                             Languages
                           </h2>
                         ) : templateId === 'minimalist' ? (
-                          <h2 className="text-[11px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-[0.2em] border-b border-slate-200 dark:border-slate-800 pb-1.5 font-sans">
+                          <h2 className="text-[11px] font-bold text-slate-900 uppercase tracking-[0.2em] border-b border-slate-200 pb-1.5 font-sans">
                             Languages
                           </h2>
                         ) : (
-                          <h2 className="text-xs font-bold text-slate-950 dark:text-slate-50 uppercase tracking-wider border-b-2 border-slate-950 dark:border-slate-805 pb-0.5 font-serif">
+                          <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5 font-serif">
                             Languages
                           </h2>
                         )}
@@ -2664,22 +2660,22 @@ const Builder = () => {
                             if (templateId === 'modern') {
                               return (
                                 <div key={idx} className="flex items-center gap-1.5 text-xs font-sans">
-                                  <span className="font-bold text-slate-750 dark:text-slate-300">{lang.language}</span>
-                                  {lang.proficiency && <span className="text-[10px] text-slate-400 bg-slate-50 dark:bg-slate-900 border px-1.5 py-0.5 rounded">({lang.proficiency})</span>}
+                                  <span className="font-bold text-slate-900">{lang.language}</span>
+                                  {lang.proficiency && <span className="text-[10px] text-slate-600 bg-slate-50 border border-slate-200 px-1.5 py-0.5 rounded">({lang.proficiency})</span>}
                                 </div>
                               );
                             } else if (templateId === 'minimalist') {
                               return (
                                 <div key={idx} className="flex items-baseline gap-1.5 text-xs font-sans">
-                                  <span className="font-medium text-slate-850 dark:text-slate-250">{lang.language}</span>
-                                  {lang.proficiency && <span className="text-[10px] text-slate-450 font-light">({lang.proficiency})</span>}
+                                  <span className="font-medium text-slate-900">{lang.language}</span>
+                                  {lang.proficiency && <span className="text-[10px] text-slate-500 font-light">({lang.proficiency})</span>}
                                 </div>
                               );
                             } else {
                               return (
                                 <div key={idx} className="flex items-baseline gap-1.5 text-xs font-serif">
-                                  <span className="font-bold text-slate-950 dark:text-slate-50">{lang.language}</span>
-                                  {lang.proficiency && <span className="text-[11px] text-slate-650 dark:text-slate-400 italic">({lang.proficiency})</span>}
+                                  <span className="font-bold text-slate-900">{lang.language}</span>
+                                  {lang.proficiency && <span className="text-[11px] text-slate-600 italic">({lang.proficiency})</span>}
                                 </div>
                               );
                             }
@@ -2778,7 +2774,7 @@ const Builder = () => {
         confirmText="OK"
         confirmColorClass="bg-indigo-600 hover:bg-indigo-700 shadow-indigo-500/10"
         iconColorClass="text-indigo-500"
-        iconBgClass="bg-indigo-50 dark:bg-indigo-950/50"
+        iconBgClass="bg-indigo-50"
         hideCancel={true}
         IconComponent={Info}
       />
@@ -2798,24 +2794,24 @@ const Builder = () => {
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800"
+              className="relative w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200"
             >
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center shrink-0">
-                    <Save className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center shrink-0">
+                    <Save className="w-5 h-5 text-indigo-600" />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">
+                  <h3 className="text-lg font-bold text-slate-900">
                     Turn Off Auto Save?
                   </h3>
                 </div>
                 
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
+                <p className="text-sm text-slate-600 mb-4 leading-relaxed">
                   Auto Save continuously saves your changes while you edit. If you turn it off, your edits will no longer be saved in real time.
                 </p>
 
-                <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-4 mb-6 border border-indigo-100 dark:border-indigo-800/30">
-                  <p className="text-xs text-indigo-800 dark:text-indigo-300 font-medium leading-relaxed">
+                <div className="bg-indigo-50 rounded-xl p-4 mb-6 border border-indigo-100">
+                  <p className="text-xs text-indigo-900 font-medium leading-relaxed">
                     <strong className="block mb-1 font-bold">Your work is protected.</strong>
                     Even with Auto Save turned off, CareerForge Pro automatically saves your latest changes when you leave the Resume Builder to help prevent accidental data loss.
                   </p>
@@ -2826,9 +2822,9 @@ const Builder = () => {
                     type="checkbox"
                     checked={dontShowAutoSaveWarning}
                     onChange={(e) => setDontShowAutoSaveWarning(e.target.checked)}
-                    className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-600 dark:border-slate-700 dark:bg-slate-800 cursor-pointer"
+                    className="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer"
                   />
-                  <span className="text-sm font-medium text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
+                  <span className="text-sm font-medium text-slate-600 group-hover:text-slate-900 transition-colors">
                     Don't show this again
                   </span>
                 </label>
@@ -2836,7 +2832,7 @@ const Builder = () => {
                 <div className="flex gap-3 justify-end">
                   <button
                     onClick={() => setShowAutoSaveModal(false)}
-                    className="px-4 py-2 text-sm font-bold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all cursor-pointer"
+                    className="px-4 py-2 text-sm font-bold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-all cursor-pointer"
                   >
                     Keep Auto Save On
                   </button>

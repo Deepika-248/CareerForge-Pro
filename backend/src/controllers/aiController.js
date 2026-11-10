@@ -367,11 +367,11 @@ export const getPlanStats = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      plan: user.plan,
+      plan: 'PRO',
       aiRewriteCount: user.aiRewriteCount,
       resumeCount,
-      resumeLimit: isProPlan(user) ? Infinity : 1,
-      aiLimit: isProPlan(user) ? Infinity : 10,
+      resumeLimit: Infinity,
+      aiLimit: Infinity,
     });
   } catch (error) {
     next(error);

@@ -11,16 +11,16 @@ const ExperienceSection = ({
   handleAddExperience,
 }) => {
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/60 rounded-2xl overflow-hidden shadow-sm">
+    <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
       <button
         onClick={() => toggleAccordion('experience')}
-        className="w-full px-5 py-4 flex items-center justify-between font-bold font-display text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-950/40 transition-colors"
+        className="w-full px-5 py-4 flex items-center justify-between font-bold font-display text-sm text-slate-800 hover:bg-slate-50 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-3">
-          <Briefcase className="w-4 h-4 text-indigo-500" />
+          <Briefcase className="w-4 h-4 text-indigo-600" />
           <span>Experience ({experience.length})</span>
         </div>
-        {activeAccordion === 'experience' ? <ChevronUp className="w-4.5 h-4.5" /> : <ChevronDown className="w-4.5 h-4.5" />}
+        {activeAccordion === 'experience' ? <ChevronUp className="w-4.5 h-4.5 text-slate-500" /> : <ChevronDown className="w-4.5 h-4.5 text-slate-500" />}
       </button>
 
       <AnimatePresence>
@@ -29,11 +29,11 @@ const ExperienceSection = ({
             initial={{ height: 0 }}
             animate={{ height: 'auto' }}
             exit={{ height: 0 }}
-            className="overflow-hidden border-t border-slate-100 dark:border-slate-800/80"
+            className="overflow-hidden border-t border-slate-100 text-left"
           >
             <div className="p-5 space-y-6">
               {experience.map((exp, idx) => (
-                <div key={idx} className="space-y-4 p-4 bg-slate-50/50 dark:bg-slate-950/30 rounded-xl relative border border-slate-100 dark:border-slate-800">
+                <div key={idx} className="space-y-4 p-4 bg-slate-50/70 rounded-xl relative border border-slate-200">
                   <button
                     onClick={() => handleRemoveExperience(idx)}
                     className="absolute top-3 right-3 text-slate-400 hover:text-red-500 transition-colors cursor-pointer"
@@ -41,61 +41,61 @@ const ExperienceSection = ({
                     <Trash2 className="w-4 h-4" />
                   </button>
                   
-                  <h6 className="text-xs font-bold text-indigo-600 dark:text-indigo-400">Position #{idx + 1}</h6>
+                  <h6 className="text-xs font-bold text-indigo-600">Position #{idx + 1}</h6>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-1">
-                      <label className="text-[9px] font-bold text-slate-400">Company</label>
+                      <label className="text-[9px] font-bold text-slate-500 uppercase">Company</label>
                       <input
                         type="text"
                         placeholder="Google"
                         value={exp.company}
                         onChange={(e) => handleUpdateExperience(idx, 'company', e.target.value)}
-                        className="w-full px-2 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-indigo-500 rounded-lg text-xs text-slate-800 dark:text-slate-100 focus:outline-none"
+                        className="w-full px-2.5 py-1.5 bg-white border border-slate-200 focus:border-indigo-600 rounded-lg text-xs text-slate-900 focus:outline-none placeholder:text-slate-400"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[9px] font-bold text-slate-400">Role Title</label>
+                      <label className="text-[9px] font-bold text-slate-500 uppercase">Role Title</label>
                       <input
                         type="text"
                         placeholder="Senior Engineer"
                         value={exp.position}
                         onChange={(e) => handleUpdateExperience(idx, 'position', e.target.value)}
-                        className="w-full px-2 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-indigo-500 rounded-lg text-xs text-slate-800 dark:text-slate-100 focus:outline-none"
+                        className="w-full px-2.5 py-1.5 bg-white border border-slate-200 focus:border-indigo-600 rounded-lg text-xs text-slate-900 focus:outline-none placeholder:text-slate-400"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2">
                     <div className="space-y-1">
-                      <label className="text-[9px] font-bold text-slate-400">Location</label>
+                      <label className="text-[9px] font-bold text-slate-500 uppercase">Location</label>
                       <input
                         type="text"
                         placeholder="Remote"
                         value={exp.location}
                         onChange={(e) => handleUpdateExperience(idx, 'location', e.target.value)}
-                        className="w-full px-2 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-indigo-500 rounded-lg text-xs text-slate-800 dark:text-slate-100 focus:outline-none"
+                        className="w-full px-2.5 py-1.5 bg-white border border-slate-200 focus:border-indigo-600 rounded-lg text-xs text-slate-900 focus:outline-none placeholder:text-slate-400"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[9px] font-bold text-slate-400">Start Date</label>
+                      <label className="text-[9px] font-bold text-slate-500 uppercase">Start Date</label>
                       <input
                         type="text"
                         placeholder="Jan 2024"
                         value={exp.startDate}
                         onChange={(e) => handleUpdateExperience(idx, 'startDate', e.target.value)}
-                        className="w-full px-2 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-indigo-500 rounded-lg text-xs text-slate-800 dark:text-slate-100 focus:outline-none"
+                        className="w-full px-2.5 py-1.5 bg-white border border-slate-200 focus:border-indigo-600 rounded-lg text-xs text-slate-900 focus:outline-none placeholder:text-slate-400"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[9px] font-bold text-slate-400">End Date</label>
+                      <label className="text-[9px] font-bold text-slate-500 uppercase">End Date</label>
                       <input
                         type="text"
                         placeholder="Present"
                         disabled={exp.current}
                         value={exp.current ? 'Present' : exp.endDate}
                         onChange={(e) => handleUpdateExperience(idx, 'endDate', e.target.value)}
-                        className="w-full px-2 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-indigo-500 rounded-lg text-xs text-slate-800 dark:text-slate-100 focus:outline-none disabled:opacity-55"
+                        className="w-full px-2.5 py-1.5 bg-white border border-slate-200 focus:border-indigo-600 rounded-lg text-xs text-slate-900 focus:outline-none disabled:opacity-55 placeholder:text-slate-400"
                       />
                     </div>
                   </div>
@@ -103,22 +103,22 @@ const ExperienceSection = ({
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
-                      id={`current-\${idx}`}
+                      id={`current-${idx}`}
                       checked={exp.current}
                       onChange={(e) => handleUpdateExperience(idx, 'current', e.target.checked)}
-                      className="w-3.5 h-3.5 text-indigo-600 bg-white dark:bg-slate-900 border-slate-200 rounded"
+                      className="w-3.5 h-3.5 text-indigo-600 bg-white border-slate-300 rounded cursor-pointer"
                     />
-                    <label htmlFor={`current-\${idx}`} className="text-[10px] font-bold text-slate-500">I currently work here</label>
+                    <label htmlFor={`current-${idx}`} className="text-[10px] font-bold text-slate-600 cursor-pointer">I currently work here</label>
                   </div>
 
-                   <div className="space-y-1">
-                    <label className="text-[9px] font-bold text-slate-400">Impact & Responsibilities (Bulleted)</label>
+                  <div className="space-y-1">
+                    <label className="text-[9px] font-bold text-slate-500 uppercase">Impact & Responsibilities (Bulleted)</label>
                     <textarea
                       rows={3}
                       placeholder="- Implemented scalable Node APIs boosting throughput by 30%&#10;- Led team of 4 engineers..."
                       value={exp.description}
                       onChange={(e) => handleUpdateExperience(idx, 'description', e.target.value)}
-                      className="w-full px-2 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-indigo-500 rounded-lg text-xs text-slate-800 dark:text-slate-100 focus:outline-none resize-y"
+                      className="w-full px-2.5 py-1.5 bg-white border border-slate-200 focus:border-indigo-600 rounded-lg text-xs text-slate-900 focus:outline-none resize-y placeholder:text-slate-400"
                     />
                     <div className="flex justify-end pt-1">
                       <button
@@ -126,9 +126,9 @@ const ExperienceSection = ({
                         onClick={() => openMagicOptimizer('bullet', exp.description, (newVal) => handleUpdateExperience(idx, 'description', newVal))}
                         disabled={!exp.description.trim()}
                         title={!exp.description.trim() ? "Please write a draft bullet first to enable AI optimization." : undefined}
-                        className="inline-flex items-center gap-1 bg-linear-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-[9px] font-bold px-2.5 py-1.5 rounded-md shadow-sm shadow-indigo-500/25 cursor-pointer hover:-translate-y-0.5 active:scale-95 active:translate-y-0 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:active:scale-100"
+                        className="inline-flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-md shadow-xs shadow-indigo-500/20 cursor-pointer hover:-translate-y-0.5 active:scale-95 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <Sparkles className="w-2.5 h-2.5" />
+                        <Sparkles className="w-3 h-3" />
                         <span>Optimize Bullets</span>
                       </button>
                     </div>
@@ -139,7 +139,7 @@ const ExperienceSection = ({
               <button
                 type="button"
                 onClick={handleAddExperience}
-                className="w-full py-2 border border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold text-slate-500 hover:text-indigo-600 transition-all cursor-pointer"
+                className="w-full py-2.5 border border-dashed border-slate-300 hover:border-indigo-600 hover:bg-indigo-50/30 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold text-slate-600 hover:text-indigo-600 transition-all cursor-pointer"
               >
                 <Plus className="w-4 h-4" /> Add Experience
               </button>

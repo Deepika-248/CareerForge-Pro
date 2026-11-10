@@ -54,6 +54,8 @@ export const useAuthStore = create((set, get) => ({
       }
 
       const { token, ...userData } = data.data;
+      userData.plan = 'PRO';
+      userData.subscriptionStatus = 'active';
       localStorage.setItem('cf_token', token);
       localStorage.setItem('cf_user', JSON.stringify(userData));
 
@@ -90,6 +92,8 @@ export const useAuthStore = create((set, get) => ({
       }
 
       const { token, ...userData } = data.data;
+      userData.plan = 'PRO';
+      userData.subscriptionStatus = 'active';
       localStorage.setItem('cf_token', token);
       localStorage.setItem('cf_user', JSON.stringify(userData));
 
@@ -153,6 +157,10 @@ export const useAuthStore = create((set, get) => ({
         throw new Error('AUTH_FAILED');
       }
 
+      if (data.data) {
+        data.data.plan = 'PRO';
+        data.data.subscriptionStatus = 'active';
+      }
       localStorage.setItem('cf_user', JSON.stringify(data.data));
       set({ user: data.data, isAuthenticated: true, error: null });
     } catch (error) {

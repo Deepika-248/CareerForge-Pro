@@ -29,12 +29,12 @@ const FeatureCell = ({ available }) =>
   available ? (
     <div className="flex justify-center">
       <span className="w-5 h-5 rounded-full bg-emerald-500/15 flex items-center justify-center">
-        <Check className="w-3 h-3 text-emerald-500" strokeWidth={3} />
+        <Check className="w-3 h-3 text-emerald-600" strokeWidth={3} />
       </span>
     </div>
   ) : (
     <div className="flex justify-center">
-      <span className="w-5 h-5 rounded-full bg-slate-200/80 dark:bg-slate-800/80 flex items-center justify-center">
+      <span className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center">
         <X className="w-3 h-3 text-slate-400" strokeWidth={3} />
       </span>
     </div>
@@ -118,7 +118,7 @@ const Billing = () => {
   const isPro = billing?.hasActiveSubscription || user?.plan === 'PRO';
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 relative overflow-hidden">
       {/* Decorative gradient orbs */}
       <div className="pointer-events-none select-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-indigo-500/6 blur-3xl" />
@@ -137,7 +137,7 @@ const Billing = () => {
         >
           <button
             onClick={() => navigate('/dashboard')}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer group"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors cursor-pointer group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
             Back to Dashboard
@@ -145,7 +145,7 @@ const Billing = () => {
           
           <button
             onClick={() => navigate('/billing/details')}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:border-slate-300 hover:text-indigo-600 shadow-xs transition-all cursor-pointer"
           >
             Billing Details
           </button>
@@ -158,17 +158,17 @@ const Billing = () => {
           transition={{ duration: 0.45, ease: premiumEase, delay: 0.06 }}
           className="text-center space-y-3"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-widest mb-2">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold uppercase tracking-widest mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
             Pricing &amp; Plans
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold font-display text-slate-900 dark:text-slate-50 leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold font-display text-slate-900 leading-tight">
             Supercharge your{' '}
-            <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
               career journey
             </span>
           </h1>
-          <p className="text-base text-slate-500 dark:text-slate-400 max-w-xl mx-auto leading-relaxed">
+          <p className="text-base text-slate-500 max-w-xl mx-auto leading-relaxed">
             Choose the plan that fits your goals. Upgrade anytime to unlock unlimited power.
           </p>
         </motion.div>
@@ -178,10 +178,10 @@ const Billing = () => {
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/25 border border-emerald-200 dark:border-emerald-800 flex items-start gap-3"
+            className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-start gap-3"
           >
             <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-            <p className="text-sm text-emerald-800 dark:text-emerald-300">{successMessage}</p>
+            <p className="text-sm text-emerald-800">{successMessage}</p>
           </motion.div>
         )}
 
@@ -189,16 +189,16 @@ const Billing = () => {
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-4 rounded-2xl bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 flex items-start gap-3"
+            className="p-4 rounded-2xl bg-red-50 border border-red-200 flex items-start gap-3"
           >
             <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
-            <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
+            <p className="text-sm text-red-700">{error}</p>
           </motion.div>
         )}
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-24 text-slate-400">
-            <Loader2 className="w-8 h-8 animate-spin mb-3 text-indigo-500" />
+            <Loader2 className="w-8 h-8 animate-spin mb-3 text-indigo-600" />
             <p className="text-sm font-semibold">Loading your plan details...</p>
           </div>
         ) : (
@@ -216,10 +216,10 @@ const Billing = () => {
                 {/* ── FREE PLAN CARD ── */}
                 <motion.div
                   variants={cardVariants}
-                  className={`relative rounded-3xl border p-7 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                  className={`relative rounded-3xl border p-7 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-white ${
                     !isPro
-                      ? 'bg-white dark:bg-slate-900 border-indigo-500/40 shadow-lg shadow-indigo-500/5 dark:shadow-indigo-500/10 ring-2 ring-indigo-500/20 hover:shadow-indigo-500/15'
-                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-sm hover:border-indigo-500/30'
+                      ? 'border-indigo-400 shadow-lg shadow-indigo-500/5 ring-2 ring-indigo-500/20 hover:shadow-indigo-500/15'
+                      : 'border-slate-200 shadow-xs hover:border-indigo-300'
                   }`}
                 >
                   {!isPro && (
@@ -232,13 +232,13 @@ const Billing = () => {
 
                   <div className="space-y-5 flex-1">
                     <div>
-                      <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center mb-4">
                         <FileText className="w-5 h-5 text-slate-500" />
                       </div>
-                      <h3 className="text-xl font-extrabold font-display text-slate-900 dark:text-slate-50">Free</h3>
-                      <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Get started for free</p>
+                      <h3 className="text-xl font-extrabold font-display text-slate-900">Free</h3>
+                      <p className="text-sm text-slate-500 mt-1">Get started for free</p>
                       <div className="mt-4 flex items-baseline gap-1">
-                        <span className="text-4xl font-extrabold font-display text-slate-900 dark:text-slate-50">$0</span>
+                        <span className="text-4xl font-extrabold font-display text-slate-900">$0</span>
                         <span className="text-sm text-slate-400 font-medium">/ month</span>
                       </div>
                     </div>
@@ -246,22 +246,22 @@ const Billing = () => {
                     <ul className="space-y-2.5">
                       {freeFeatures.map(({ icon: Icon, text }) => (
                         <li key={text} className="flex items-center gap-2.5">
-                          <span className="w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0">
+                          <span className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
                             <Icon className="w-3 h-3 text-slate-500" />
                           </span>
-                          <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">{text}</span>
+                          <span className="text-sm text-slate-700 font-medium">{text}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800">
+                  <div className="mt-auto pt-6 border-t border-slate-100">
                     {!isPro ? (
-                      <div className="w-full py-3.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-center text-sm font-bold text-slate-500">
+                      <div className="w-full py-3.5 rounded-xl bg-slate-100 text-center text-sm font-bold text-slate-600">
                         Current Plan: FREE
                       </div>
                     ) : (
-                      <div className="w-full py-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-center text-sm font-semibold text-slate-400">
+                      <div className="w-full py-3.5 rounded-xl bg-slate-50 border border-slate-200 text-center text-sm font-semibold text-slate-500">
                         Free Tier
                       </div>
                     )}
@@ -341,52 +341,52 @@ const Billing = () => {
             {/* ══ SECTION 3: Feature Comparison Table ══ */}
             <motion.div variants={itemVariants} className="space-y-5">
               <div className="text-center">
-                <h2 className="text-2xl font-bold font-display text-slate-800 dark:text-slate-100">
+                <h2 className="text-2xl font-bold font-display text-slate-900">
                   Feature Comparison
                 </h2>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                <p className="text-sm text-slate-500 mt-1">
                   See exactly what is included in each plan.
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm">
+              <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-xs">
                 {/* Table Header */}
-                <div className="grid grid-cols-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50">
+                <div className="grid grid-cols-3 border-b border-slate-100 bg-slate-50">
                   <div className="px-6 py-4 text-left">
-                    <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Feature</span>
+                    <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Feature</span>
                   </div>
                   <div className="px-4 py-4 text-center">
                     <div className="inline-flex flex-col items-center gap-1">
-                      <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Free</span>
+                      <span className="text-xs font-bold uppercase tracking-widest text-slate-600">Free</span>
                       <span className="text-[10px] text-slate-400 font-semibold">$0/mo</span>
                     </div>
                   </div>
                   <div className="px-4 py-4 text-center">
                     <div className="inline-flex flex-col items-center gap-1">
-                      <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                      <span className="text-xs font-bold uppercase tracking-widest text-indigo-600 flex items-center gap-1">
                         <Crown className="w-3 h-3 text-amber-500" /> Pro
                       </span>
-                      <span className="text-[10px] text-indigo-500 dark:text-indigo-400 font-semibold">$9/mo</span>
+                      <span className="text-[10px] text-indigo-600 font-semibold">$9/mo</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Table Rows */}
-                <div className="divide-y divide-slate-100 dark:divide-slate-800">
+                <div className="divide-y divide-slate-100">
                   {comparisonRows.map((row, idx) => (
                     <div
                       key={row.label}
-                      className={`grid grid-cols-3 items-center hover:bg-slate-50/70 dark:hover:bg-slate-950/40 transition-colors duration-300 ${
-                        idx % 2 === 0 ? '' : 'bg-slate-50/40 dark:bg-slate-950/20'
+                      className={`grid grid-cols-3 items-center hover:bg-slate-50 transition-colors duration-200 ${
+                        idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'
                       }`}
                     >
                       <div className="px-6 py-4 text-left">
-                        <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">{row.label}</span>
+                        <span className="text-sm font-semibold text-slate-800">{row.label}</span>
                       </div>
 
                       <div className="px-4 py-4">
                         {typeof row.free === 'string' ? (
-                          <p className="text-center text-xs font-bold text-slate-600 dark:text-slate-400">{row.free}</p>
+                          <p className="text-center text-xs font-bold text-slate-600">{row.free}</p>
                         ) : (
                           <FeatureCell available={row.freeAvail} />
                         )}
@@ -394,7 +394,7 @@ const Billing = () => {
 
                       <div className="px-4 py-4">
                         {typeof row.pro === 'string' ? (
-                          <p className="text-center text-xs font-bold text-indigo-600 dark:text-indigo-400">{row.pro}</p>
+                          <p className="text-center text-xs font-bold text-indigo-600">{row.pro}</p>
                         ) : (
                           <FeatureCell available={row.proAvail} />
                         )}
@@ -404,8 +404,8 @@ const Billing = () => {
                 </div>
 
                 {!isPro && (
-                  <div className="px-6 py-5 bg-gradient-to-r from-indigo-500/8 to-purple-500/5 border-t border-indigo-500/15 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                  <div className="px-6 py-5 bg-gradient-to-r from-indigo-50 to-purple-50 border-t border-indigo-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p className="text-sm font-semibold text-slate-800">
                       Ready to unlock the full suite?
                     </p>
                     <button
@@ -419,9 +419,9 @@ const Billing = () => {
                 )}
 
                 {isPro && (
-                  <div className="px-6 py-5 bg-gradient-to-r from-amber-500/8 to-amber-400/5 border-t border-amber-500/15 flex items-center gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-amber-500 shrink-0" />
-                    <p className="text-sm font-semibold text-amber-700 dark:text-amber-400">
+                  <div className="px-6 py-5 bg-gradient-to-r from-amber-50 to-amber-50/50 border-t border-amber-200 flex items-center gap-3">
+                    <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
+                    <p className="text-sm font-semibold text-amber-800">
                       You have access to every feature in this table.
                     </p>
                   </div>
@@ -437,34 +437,34 @@ const Billing = () => {
                     icon: Shield,
                     title: 'Secure & Private',
                     desc: 'Your resume data is encrypted and never shared.',
-                    color: 'text-emerald-500',
-                    bg: 'bg-emerald-50 dark:bg-emerald-950/30',
+                    color: 'text-emerald-600',
+                    bg: 'bg-emerald-50',
                   },
                   {
                     icon: Zap,
                     title: 'Instant Access',
                     desc: 'Features activate immediately after upgrading.',
-                    color: 'text-indigo-500',
-                    bg: 'bg-indigo-50 dark:bg-indigo-950/30',
+                    color: 'text-indigo-600',
+                    bg: 'bg-indigo-50',
                   },
                   {
                     icon: Star,
                     title: 'Premium Quality',
                     desc: 'ATS-optimized templates trusted by professionals.',
-                    color: 'text-amber-500',
-                    bg: 'bg-amber-50 dark:bg-amber-950/30',
+                    color: 'text-amber-600',
+                    bg: 'bg-amber-50',
                   },
                 ].map(({ icon: Icon, title, desc, color, bg }) => (
                   <div
                     key={title}
-                    className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 flex items-start gap-4 shadow-sm"
+                    className="bg-white border border-slate-200 rounded-2xl p-5 flex items-start gap-4 shadow-xs"
                   >
                     <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center shrink-0`}>
                       <Icon className={`w-5 h-5 ${color}`} />
                     </div>
                     <div className="text-left">
-                      <h4 className="text-sm font-bold text-slate-800 dark:text-slate-100">{title}</h4>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">{desc}</p>
+                      <h4 className="text-sm font-bold text-slate-900">{title}</h4>
+                      <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{desc}</p>
                     </div>
                   </div>
                 ))}

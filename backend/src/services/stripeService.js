@@ -98,35 +98,13 @@ export const cancelSubscription = async (user) => {
 };
 
 export const getBillingStatus = async (user) => {
-  const stripe = getStripe();
-  let subscription = null;
-
-  if (user.stripeSubscriptionId) {
-    try {
-      subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
-    } catch (error) {
-      if (error.statusCode !== 404) {
-        throw error;
-      }
-    }
-  }
-
   return {
-    plan: user.plan,
-    subscriptionStatus: user.subscriptionStatus || 'none',
-    subscriptionExpiresAt: user.subscriptionExpiresAt || null,
-    stripeCustomerId: user.stripeCustomerId || null,
-    hasActiveSubscription: ['active', 'trialing'].includes(user.subscriptionStatus),
-    subscription: subscription
-      ? {
-          id: subscription.id,
-          status: subscription.status,
-          cancelAtPeriodEnd: subscription.cancel_at_period_end,
-          currentPeriodEnd: subscription.current_period_end
-            ? new Date(subscription.current_period_end * 1000).toISOString()
-            : null,
-        }
-      : null,
+    plan: 'PRO',
+    subscriptionStatus: 'active',
+    subscriptionExpiresAt: null,
+    stripeCustomerId: null,
+    hasActiveSubscription: true,
+    subscription: null,
   };
 };
 

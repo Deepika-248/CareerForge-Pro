@@ -34,12 +34,11 @@ const Landing = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-slate-950 overflow-hidden">
+    <div className="relative min-h-screen bg-white text-slate-900 overflow-hidden font-sans">
       {/* Decorative Blur Blobs with smooth continuous floating animations */}
       <motion.div 
-        className="absolute top-[-10%] left-[-10%] w-125 h-125 bg-indigo-200/40 dark:bg-indigo-900/20 rounded-full blur-[120px] pointer-events-none"
+        className="absolute top-[-10%] left-[-10%] w-125 h-125 bg-indigo-100/50 rounded-full blur-[120px] pointer-events-none"
         animate={{
           x: [0, 30, 0],
           y: [0, -40, 0],
@@ -52,7 +51,7 @@ const Landing = () => {
         }}
       />
       <motion.div 
-        className="absolute bottom-[20%] right-[-10%] w-150 h-150 bg-emerald-100/40 dark:bg-emerald-950/20 rounded-full blur-[140px] pointer-events-none"
+        className="absolute bottom-[20%] right-[-10%] w-150 h-150 bg-blue-100/40 rounded-full blur-[140px] pointer-events-none"
         animate={{
           x: [0, -40, 0],
           y: [0, 30, 0],
@@ -72,8 +71,8 @@ const Landing = () => {
           className={`
             relative w-full max-w-7xl flex items-center justify-between border rounded-2xl px-6 py-4 transition-all duration-300
             ${isScrolled 
-              ? 'border-indigo-500/25 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-lg shadow-indigo-500/5 dark:shadow-indigo-500/10' 
-              : 'border-slate-200/50 dark:border-slate-800/50 bg-white/50 dark:bg-slate-950/50 backdrop-blur-md shadow-sm'
+              ? 'border-indigo-200 bg-white/95 backdrop-blur-xl shadow-lg shadow-slate-100' 
+              : 'border-slate-200 bg-white/80 backdrop-blur-md shadow-xs'
             }
           `}
           initial={{ opacity: 0, y: -20 }}
@@ -81,18 +80,18 @@ const Landing = () => {
           transition={{ duration: 0.5, ease: premiumEase }}
         >
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center shadow-lg shadow-indigo-500/20 text-white font-bold text-lg font-display">
+            <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-indigo-600 to-indigo-500 flex items-center justify-center shadow-md shadow-indigo-500/20 text-white font-bold text-lg font-display">
               CF
             </div>
-            <span className="font-bold text-xl font-display text-slate-800 dark:text-slate-100 tracking-tight">
-              CareerForge <span className="text-indigo-600 dark:text-indigo-400">Pro</span>
+            <span className="font-bold text-xl font-display text-slate-900 tracking-tight">
+              CareerForge <span className="text-indigo-600">Pro</span>
             </span>
           </Link>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300 absolute left-1/2 -translate-x-1/2">
-            <a href="#features" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Features</a>
-            <a href="#workflow" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Workflow</a>
-            <a href="#stats" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Why CareerForge</a>
-            <Link to="/contact" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Contact</Link>
+          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600 absolute left-1/2 -translate-x-1/2">
+            <a href="#features" className="hover:text-indigo-600 transition-colors">Features</a>
+            <a href="#workflow" className="hover:text-indigo-600 transition-colors">Workflow</a>
+            <a href="#stats" className="hover:text-indigo-600 transition-colors">Why CareerForge</a>
+            <Link to="/contact" className="hover:text-indigo-600 transition-colors">Contact</Link>
           </div>
           <div className="flex items-center gap-4 relative">
             <AnimatePresence>
@@ -104,7 +103,7 @@ const Landing = () => {
                   exit={{ opacity: 0, scale: 0.8, x: 15 }}
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.9 }}
-                  className="absolute right-full mr-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/60 dark:hover:bg-indigo-900/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200/40 dark:border-indigo-800/40 shadow-sm cursor-pointer whitespace-nowrap"
+                  className="absolute right-full mr-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border border-indigo-200/60 shadow-xs cursor-pointer whitespace-nowrap"
                   title="Scroll to top"
                 >
                   <motion.div
@@ -125,20 +124,20 @@ const Landing = () => {
               <motion.div variants={buttonScale} initial="initial" whileHover="hover" whileTap="tap">
                 <Link
                   to="/dashboard"
-                  className="inline-flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-all shadow-md hover:shadow-indigo-500/10"
+                  className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-md shadow-indigo-500/20 hover:shadow-lg"
                 >
                   Dashboard <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
             ) : (
               <>
-                <Link to="/login" className="text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-4 py-2 transition-colors">
+                <Link to="/login" className="text-sm font-semibold text-slate-700 hover:text-indigo-600 px-3 py-2 transition-colors">
                   Sign In
                 </Link>
                 <motion.div variants={buttonScale} initial="initial" whileHover="hover" whileTap="tap">
                   <Link
                     to="/signup"
-                    className="bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-900 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-sm"
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-md shadow-indigo-500/20"
                   >
                     Get Started
                   </Link>
@@ -150,7 +149,7 @@ const Landing = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 pt-28 pb-24 md:pt-36 md:pb-32 grid md:grid-cols-12 gap-12 items-center relative z-10">
+      <section className="max-w-7xl mx-auto px-6 pt-32 pb-24 md:pt-40 md:pb-32 grid md:grid-cols-12 gap-12 items-center relative z-10">
         <motion.div 
           className="md:col-span-7 space-y-6 text-left"
           initial="hidden"
@@ -159,19 +158,19 @@ const Landing = () => {
         >
           <motion.div 
             variants={staggerItem}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200/50 dark:border-indigo-900/50 text-indigo-700 dark:text-indigo-300 text-xs font-semibold uppercase tracking-wider"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold uppercase tracking-wider shadow-xs"
           >
             <Sparkles className="w-3.5 h-3.5" /> CareerForge Pro: ATS Resume Builder
           </motion.div>
           <motion.h1 
             variants={staggerItem}
-            className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 font-display leading-[1.1]"
+            className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 font-display leading-[1.1]"
           >
-            Forge an <span className="bg-linear-to-r from-indigo-600 via-indigo-500 to-emerald-500 bg-clip-text text-transparent">ATS-Proof</span> Resume in Real Time.
+            Forge an <span className="bg-linear-to-r from-indigo-600 via-blue-600 to-indigo-700 bg-clip-text text-transparent">ATS-Proof</span> Resume in Real Time.
           </motion.h1>
           <motion.p 
             variants={staggerItem}
-            className="text-lg text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed"
+            className="text-lg text-slate-600 max-w-xl leading-relaxed font-normal"
           >
             Build clean, highly optimized resumes designed specifically to beat applicant tracking bots. Edit sections dynamically, view structural layouts instantly, and stand out to top hiring teams.
           </motion.p>
@@ -183,7 +182,7 @@ const Landing = () => {
             <motion.div variants={buttonScale} initial="initial" whileHover="hover" whileTap="tap">
               <Link
                 to={isAuthenticated ? "/dashboard" : "/signup"}
-                className="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-7 py-4 rounded-2xl font-semibold shadow-lg shadow-indigo-500/20 transition-all"
+                className="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-7 py-4 rounded-2xl font-bold shadow-lg shadow-indigo-500/25 transition-all"
               >
                 Build Your ATS-Proof Resume Now
                 <ChevronRight className="w-5 h-5" />
@@ -192,7 +191,7 @@ const Landing = () => {
             <motion.div variants={buttonScale} initial="initial" whileHover="hover" whileTap="tap">
               <a
                 href="#features"
-                className="inline-flex items-center justify-center gap-2 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300 px-7 py-4 rounded-2xl font-semibold transition-all"
+                className="inline-flex items-center justify-center gap-2 border border-slate-300 hover:bg-slate-50 text-slate-700 px-7 py-4 rounded-2xl font-bold transition-all shadow-xs"
               >
                 Explore Features
               </a>
@@ -207,46 +206,46 @@ const Landing = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15, ease: premiumEase }}
         >
-          <div className="absolute inset-0 bg-indigo-500/10 dark:bg-indigo-500/5 rounded-3xl blur-2xl" />
+          <div className="absolute inset-0 bg-indigo-500/10 rounded-3xl blur-2xl pointer-events-none" />
           <motion.div 
-            className="relative glass-card border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-2xl overflow-hidden cursor-grab active:cursor-grabbing"
+            className="relative bg-white border border-slate-200 rounded-3xl p-6 shadow-xl overflow-hidden cursor-grab active:cursor-grabbing"
             variants={premiumCardHover}
             initial="initial"
             whileHover="hover"
           >
             {/* Visualizer Score */}
-            <div className="flex items-center justify-between pb-6 border-b border-slate-200/50 dark:border-slate-800/50">
-              <div className="flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
+            <div className="flex items-center justify-between pb-6 border-b border-slate-100">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-400" />
+                <div className="w-3 h-3 rounded-full bg-amber-400" />
+                <div className="w-3 h-3 rounded-full bg-emerald-400" />
               </div>
-              <div className="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 px-3 py-1 rounded-full text-xs font-bold">
-                <Gauge className="w-4 h-4" /> ATS SCORE: 92%
+              <div className="flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold border border-emerald-200/60">
+                <Gauge className="w-4 h-4 text-emerald-600" /> ATS SCORE: 92%
               </div>
             </div>
 
             {/* Resume Wireframe Mockup */}
             <div className="space-y-5 pt-6 text-left">
               <div className="space-y-2">
-                <div className="h-5 w-2/3 bg-slate-300 dark:bg-slate-700 rounded-md animate-pulse" />
-                <div className="h-3 w-1/2 bg-slate-200 dark:bg-slate-800 rounded-md animate-pulse" />
+                <div className="h-5 w-2/3 bg-slate-200 rounded-md animate-pulse" />
+                <div className="h-3 w-1/2 bg-slate-100 rounded-md animate-pulse" />
               </div>
               
               <div className="space-y-3">
-                <div className="h-4 w-1/4 bg-indigo-200 dark:bg-indigo-900/50 rounded-md" />
+                <div className="h-4 w-1/4 bg-indigo-100 rounded-md" />
                 <div className="space-y-1.5">
-                  <div className="h-2.5 w-full bg-slate-200 dark:bg-slate-800 rounded-md" />
-                  <div className="h-2.5 w-5/6 bg-slate-200 dark:bg-slate-800 rounded-md" />
-                  <div className="h-2.5 w-4/5 bg-slate-200 dark:bg-slate-800 rounded-md" />
+                  <div className="h-2.5 w-full bg-slate-100 rounded-md" />
+                  <div className="h-2.5 w-5/6 bg-slate-100 rounded-md" />
+                  <div className="h-2.5 w-4/5 bg-slate-100 rounded-md" />
                 </div>
               </div>
 
               <div className="space-y-3 pt-2">
-                <div className="h-4 w-1/3 bg-indigo-200 dark:bg-indigo-900/50 rounded-md" />
+                <div className="h-4 w-1/3 bg-indigo-100 rounded-md" />
                 <div className="flex gap-2 flex-wrap">
                   {['React', 'Node.js', 'MongoDB', 'System Design', 'Express', 'Tailwind'].map((skill, idx) => (
-                    <span key={idx} className="text-[10px] font-semibold bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded border border-indigo-100 dark:border-indigo-900">
+                    <span key={idx} className="text-[10px] font-bold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-md border border-indigo-100">
                       {skill}
                     </span>
                   ))}
@@ -256,7 +255,7 @@ const Landing = () => {
 
             {/* Glowing check overlay with premium floating bounce */}
             <motion.div 
-              className="absolute -bottom-4 -right-4 bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-xl border border-slate-200/50 dark:border-slate-800/50 flex items-center gap-3"
+              className="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-xl border border-slate-200 flex items-center gap-3"
               animate={{
                 y: [0, -8, 0],
               }}
@@ -266,12 +265,12 @@ const Landing = () => {
                 ease: "easeInOut",
               }}
             >
-              <div className="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+              <div className="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-600/20">
                 <FileCheck className="w-5 h-5" />
               </div>
               <div className="text-left">
-                <p className="text-[11px] font-medium text-slate-400">Structural Check</p>
-                <p className="text-xs font-bold text-slate-800 dark:text-slate-100">100% Parsable</p>
+                <p className="text-[11px] font-medium text-slate-500">Structural Check</p>
+                <p className="text-xs font-bold text-slate-900">100% Parsable</p>
               </div>
             </motion.div>
           </motion.div>
@@ -279,7 +278,7 @@ const Landing = () => {
       </section>
 
       {/* Feature Cards Grid with Staggered Scroll Reveal */}
-      <section id="features" className="max-w-7xl mx-auto px-6 py-20 relative z-10 border-t border-slate-200/50 dark:border-slate-900/50 scroll-mt-32">
+      <section id="features" className="max-w-7xl mx-auto px-6 py-20 relative z-10 border-t border-slate-200 scroll-mt-32">
         <motion.div 
           className="text-center space-y-4 max-w-2xl mx-auto mb-16"
           initial="hidden"
@@ -287,10 +286,10 @@ const Landing = () => {
           viewport={{ once: false, amount: 0.25 }}
           variants={scrollReveal}
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-display text-slate-900 dark:text-slate-50">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-slate-900">
             Engineered to Secure Interviews
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">
+          <p className="text-slate-600 leading-relaxed text-sm md:text-base">
             Every layer of CareerForge Pro is fine-tuned to beat applicant tracking bots, keeping recruiters engaged with clear presentation formats.
           </p>
         </motion.div>
@@ -306,18 +305,18 @@ const Landing = () => {
           <motion.div 
             variants={staggerItem}
             whileHover="hover"
-            className="glass-card rounded-2xl p-6 border border-slate-200/50 dark:border-slate-800/50 flex flex-col text-left space-y-4 shadow-sm"
+            className="bg-white rounded-2xl p-6 border border-slate-200 flex flex-col text-left space-y-4 shadow-sm hover:shadow-md hover:border-indigo-300 transition-all duration-300"
             custom={0}
           >
             <motion.div 
               variants={premiumCardHover} 
               className="w-full h-full flex flex-col space-y-4"
             >
-              <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+              <div className="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
                 <FileText className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-lg font-display text-slate-800 dark:text-slate-100">Split-Screen Live Editor</h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+              <h3 className="font-bold text-lg font-display text-slate-900">Split-Screen Live Editor</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
                 Edit experience, education, skills, and projects in our structured form panel while watching your professional ATS resume adapt in real-time.
               </p>
             </motion.div>
@@ -327,18 +326,18 @@ const Landing = () => {
           <motion.div 
             variants={staggerItem}
             whileHover="hover"
-            className="glass-card rounded-2xl p-6 border border-slate-200/50 dark:border-slate-800/50 flex flex-col text-left space-y-4 shadow-sm"
+            className="bg-white rounded-2xl p-6 border border-slate-200 flex flex-col text-left space-y-4 shadow-sm hover:shadow-md hover:border-indigo-300 transition-all duration-300"
             custom={1}
           >
             <motion.div 
-              variants={premiumCardHover}
+              variants={premiumCardHover} 
               className="w-full h-full flex flex-col space-y-4"
             >
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
                 <Gauge className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-lg font-display text-slate-800 dark:text-slate-100">Baseline ATS Checker</h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+              <h3 className="font-bold text-lg font-display text-slate-900">Baseline ATS Checker</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
                 Get immediate, dynamic structural feedback. Identify missing sections and keyword counts on the fly as you assemble your draft.
               </p>
             </motion.div>
@@ -348,18 +347,18 @@ const Landing = () => {
           <motion.div 
             variants={staggerItem}
             whileHover="hover"
-            className="glass-card rounded-2xl p-6 border border-slate-200/50 dark:border-slate-800/50 flex flex-col text-left space-y-4 shadow-sm"
+            className="bg-white rounded-2xl p-6 border border-slate-200 flex flex-col text-left space-y-4 shadow-sm hover:shadow-md hover:border-indigo-300 transition-all duration-300"
             custom={2}
           >
             <motion.div 
-              variants={premiumCardHover}
+              variants={premiumCardHover} 
               className="w-full h-full flex flex-col space-y-4"
             >
-              <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+              <div className="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
                 <Layers className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-lg font-display text-slate-800 dark:text-slate-100">Dynamic Section Sorting</h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+              <h3 className="font-bold text-lg font-display text-slate-900">Dynamic Section Sorting</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
                 Rearrange resume flow instantly (e.g. shift Skills above Experience, or Projects below Education) depending on your target role.
               </p>
             </motion.div>
@@ -368,7 +367,7 @@ const Landing = () => {
       </section>
 
       {/* Feature Walkthrough */}
-      <section id="workflow" className="bg-slate-100/50 dark:bg-slate-900/30 py-20 border-y border-slate-200/30 dark:border-slate-900/30 relative z-10 scroll-mt-32">
+      <section id="workflow" className="bg-slate-50 py-20 border-y border-slate-200 relative z-10 scroll-mt-32">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <motion.div 
             className="space-y-6 text-left"
@@ -379,13 +378,13 @@ const Landing = () => {
           >
             <motion.h2 
               variants={staggerItem}
-              className="text-3xl md:text-4xl font-bold font-display text-slate-900 dark:text-slate-50"
+              className="text-3xl md:text-4xl font-bold font-display text-slate-900"
             >
               Future-Proof Foundation Designed for Scale
             </motion.h2>
             <motion.p 
               variants={staggerItem}
-              className="text-slate-600 dark:text-slate-400 leading-relaxed"
+              className="text-slate-600 leading-relaxed"
             >
               Built on production-grade Node, Express, MongoDB and Zustand state synchronization. Our architecture is pre-configured and ready to unlock next-generation features:
             </motion.p>
@@ -397,12 +396,12 @@ const Landing = () => {
                 { title: 'Job Matching Matrix', desc: 'Cross-reference resume keywords against scraping APIs instantly.' },
               ].map((item, idx) => (
                 <motion.li key={idx} className="flex gap-3" variants={staggerItem}>
-                  <div className="w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 mt-1">
+                  <div className="w-5 h-5 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 mt-1">
                     <Zap className="w-3 h-3 animate-pulse" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm text-slate-800 dark:text-slate-200">{item.title}</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">{item.desc}</p>
+                    <h4 className="font-bold text-sm text-slate-900">{item.title}</h4>
+                    <p className="text-xs text-slate-500">{item.desc}</p>
                   </div>
                 </motion.li>
               ))}
@@ -410,29 +409,23 @@ const Landing = () => {
           </motion.div>
           
           <motion.div 
-            className="glass-card rounded-3xl p-8 border border-slate-200 dark:border-slate-800 relative overflow-hidden"
+            className="bg-white rounded-3xl p-8 border border-slate-200 shadow-md relative overflow-hidden"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.25 }}
             variants={scrollReveal}
           >
-            {/* Soft decorative background pulse */}
-            <motion.div 
-              className="absolute -right-16 -top-16 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <div className="text-slate-800 dark:text-slate-200 text-left font-mono text-xs space-y-4">
-              <p className="text-emerald-500">// Scalable Resume Data Schema Definition</p>
+            <div className="text-slate-800 text-left font-mono text-xs space-y-4">
+              <p className="text-emerald-600 font-semibold">// Scalable Resume Data Schema Definition</p>
               <p>const resumeSchema = new Schema(&#123;</p>
               <p className="pl-4">userId: Schema.Types.ObjectId,</p>
-              <p className="pl-4 text-indigo-400">sectionOrder: [String], // Drag & drop ready</p>
-              <p className="pl-4 text-indigo-400">customSections: [CustomSectionSchema],</p>
-              <p className="pl-4 text-indigo-400">atsMetadata: &#123; score: Number, feedback: [String] &#125;</p>
+              <p className="pl-4 text-indigo-600">sectionOrder: [String], // Drag & drop ready</p>
+              <p className="pl-4 text-indigo-600">customSections: [CustomSectionSchema],</p>
+              <p className="pl-4 text-indigo-600">atsMetadata: &#123; score: Number, feedback: [String] &#125;</p>
               <p>&#125;);</p>
-              <div className="pt-4 border-t border-slate-200/50 dark:border-slate-800/50 flex justify-between items-center text-[10px] text-slate-400 font-sans">
+              <div className="pt-4 border-t border-slate-200 flex justify-between items-center text-[10px] text-slate-500 font-sans">
                 <span>Schema parsed & verified</span>
-                <span className="text-emerald-500 flex items-center gap-1"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" /> Active</span>
+                <span className="text-emerald-600 font-bold flex items-center gap-1"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" /> Active</span>
               </div>
             </div>
           </motion.div>
@@ -455,24 +448,24 @@ const Landing = () => {
             { metric: '100%', label: 'Data Security Compliant' },
           ].map((stat, idx) => (
             <motion.div key={idx} className="space-y-2" variants={staggerItemScale}>
-              <h3 className="text-4xl md:text-5xl font-extrabold font-display text-indigo-600 dark:text-indigo-400 tracking-tight">{stat.metric}</h3>
-              <p className="text-xs md:text-sm font-semibold text-slate-500 dark:text-slate-400">{stat.label}</p>
+              <h3 className="text-4xl md:text-5xl font-extrabold font-display text-indigo-600 tracking-tight">{stat.metric}</h3>
+              <p className="text-xs md:text-sm font-semibold text-slate-600">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200/50 dark:border-slate-900/50 py-12 relative z-10 text-slate-400 dark:text-slate-500 text-sm">
+      <footer className="border-t border-slate-200 py-12 relative z-10 text-slate-500 text-sm bg-white">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
               CF
             </div>
-            <span className="font-bold text-slate-800 dark:text-slate-100 font-display">CareerForge Pro</span>
+            <span className="font-bold text-slate-900 font-display">CareerForge Pro</span>
           </div>
           <div className="flex items-center gap-6">
-            <Link to="/contact" className="hover:text-indigo-500 transition-colors">Contact</Link>
+            <Link to="/contact" className="hover:text-indigo-600 font-medium transition-colors">Contact</Link>
             <p>© 2026 CareerForge Pro. Developed with Enterprise Standards.</p>
           </div>
         </div>
