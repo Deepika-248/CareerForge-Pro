@@ -74,6 +74,10 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
+  signup: async (name, email, password) => {
+    return get().register(name, email, password);
+  },
+
   login: async (email, password) => {
     set({ loading: true, error: null });
     try {
